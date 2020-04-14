@@ -46,21 +46,22 @@ public class ManagerServiceImpl implements ManagerService {
     }
 
     @Override
-    public int recoverPwd(int id, ManagerDTO managerDTO) {
+    public String recoverPwd(ManagerDTO managerDTO) {
         // 先通过管理员姓名查出原数据信息
-        lambdaQuery.select(Manager::getManagerId, Manager::getManagerName)
-                .like(Manager::getManagerName, managerDTO.getManagerName());
+        lambdaQuery.select(Manager::getManagerName, Manager::getManagerEmail)
+                .like(Manager::getManagerEmail, managerDTO.getManagerEmail());
         Manager manager = managerMapper.selectOne(lambdaQuery);
 
-        // 判断登录的当前用户 ID 是否和数据库一致
-        if (manager.getManagerId() == id) {
+        // 判断当前用户邮箱是否和数据库一致
+        if (manager.getManagerEmail().equals(managerDTO.getManagerEmail())) {
             // 将新的密码覆盖原来的密码
-            lambdaUpdate.eq(Manager::getManagerId, manager.getManagerId())
-                    .eq(Manager::getManagerName, manager.getManagerName())
+            lambdaUpdate.eq(Manager::getManagerName, manager.getManagerName())
+                    .eq(Manager::getManagerEmail, managerDTO.getManagerEmail())
                     .set(Manager::getManagerPassword, managerDTO.getManagerPassword());
-            return managerMapper.update(null, lambdaUpdate);
+            managerMapper.update(null, lambdaUpdate);
+            return manager.getManagerName();
         } else {
-            return 0;
+            return null;
         }
     }
 }

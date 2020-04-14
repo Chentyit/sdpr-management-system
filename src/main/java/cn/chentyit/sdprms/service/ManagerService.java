@@ -26,9 +26,8 @@ public interface ManagerService {
 
     /**
      * 用户重置密码
-     * @param id 从 Session 中获取的用户 id
      * @param managerDTO
      * @return
      */
-    int recoverPwd(int id, ManagerDTO managerDTO);
+    String recoverPwd(ManagerDTO managerDTO);
 }
