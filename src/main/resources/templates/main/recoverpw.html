@@ -28,8 +28,19 @@
                         <form th:action="@{/recoverpw}" th:method="post">
                             <div class="form-group mb-3">
                                 <label for="emailaddress">Email address</label>
-                                <input class="form-control" type="email" id="emailaddress" required="" name="managerEmail"
+                                <input class="form-control" type="email" id="emailaddress" required=""
+                                       name="managerEmail"
                                        placeholder="Enter your email">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="password">Password</label>
+                                <input class="form-control"
+                                       type="password"
+                                       required
+                                       id="password"
+                                       name="managerPassword"
+                                       placeholder="Enter your password">
                             </div>
 
                             <div class="form-group mb-0 text-center">
@@ -62,6 +73,6 @@
 </footer>
 
 <!-- App js -->
-<script src="assets/js/app.min.js"></script>
+<script th:src="@{js/app.min.js}"></script>
 </body>
 </html>
