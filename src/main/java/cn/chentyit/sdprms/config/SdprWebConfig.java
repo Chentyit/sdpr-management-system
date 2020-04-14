@@ -41,8 +41,10 @@ public class SdprWebConfig {
                         .excludePathPatterns("/", "/index", "/index.html")
                         // 注册页面路径
                         .excludePathPatterns("/register.html")
+                        // 重设密码路径
+                        .excludePathPatterns("/recoverpw.html")
                         // 登录，注册，重置密码请求
-                        .excludePathPatterns("/login", "/register")
+                        .excludePathPatterns("/login", "/register", "/recoverpw")
                         .excludePathPatterns("/css/*", "/js/*", "/fonts/*", "/images/*");
             }
         };
