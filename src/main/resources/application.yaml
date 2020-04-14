@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/repository?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&serverTimezone=Asia/Shanghai&useSSL=false&nullCatalogMeansCurrent=true
+    username: root
+    password: Chentyit123456
+logging:
+  level:
+    root: info
+    cn.chentyit.sdprms.dao: trace
+mybatis-plus:
+  mapper-locations:
+    - cn/chentyit/mybatisplus/mapper/*
+server:
+  port: 23333
