@@ -28,9 +28,6 @@ public class SdprWebConfig {
 
                 // 注册
                 registry.addViewController("/register.html").setViewName("main/register");
-
-                // 忘记密码
-                registry.addViewController("/recoverpw.html").setViewName("main/recoverpw");
             }
 
             @Override
