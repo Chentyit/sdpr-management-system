@@ -18,6 +18,8 @@
     <!-- App css -->
     <link th:href="@{css/icons.min.css}" rel="stylesheet" type="text/css"/>
     <link th:href="@{css/app.min.css}" rel="stylesheet" type="text/css"/>
+
+    <script th:src="@{/webjars/jquery/3.4.1/jquery.js}"></script>
 </head>
 
 <body>
@@ -26,7 +28,7 @@
     <div class="container-fluid">
 
         <!-- LOGO -->
-        <a th:href="@{overview}" class="topnav-logo">
+        <a th:href="@{/overview}" class="topnav-logo">
             <span class="topnav-logo-lg">
                 <img th:src="@{images/logo-light.png}" alt="" height="16">
             </span>
