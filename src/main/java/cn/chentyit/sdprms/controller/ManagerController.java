@@ -30,7 +30,7 @@ public class ManagerController {
         Manager manager = managerService.login(managerDTO);
         if (manager != null) {
             session.setAttribute("manager", manager);
-            return "overview/overview";
+            return "redirect:/overview";
         } else {
             return "redirect:/index.html";
         }
