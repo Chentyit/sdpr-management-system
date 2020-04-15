@@ -30,7 +30,7 @@ public class ManagerController {
         Manager manager = managerService.login(managerDTO);
         if (manager != null) {
             session.setAttribute("manager", manager);
-            return "";
+            return "overview/overview";
         } else {
             return "redirect:/index.html";
         }
@@ -73,5 +73,12 @@ public class ManagerController {
             modelAndView.addObject("recoverPwdMsg", "重置密码失败，检查用户是否存在");
         }
         return modelAndView;
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+        session.removeAttribute("manager");
+        session.invalidate();
+        return "main/login";
     }
 }
