@@ -8,4 +8,4 @@ spring:
     active: dev
 mybatis-plus:
   mapper-locations:
-    - cn/chentyit/mybatisplus/mapper/*
+  - classpath*:/mapper/**Mapper.xml
