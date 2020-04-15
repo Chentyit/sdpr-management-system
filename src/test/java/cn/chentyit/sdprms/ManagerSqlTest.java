@@ -2,6 +2,7 @@ package cn.chentyit.sdprms;
 
 import cn.chentyit.sdprms.dao.ManagerMapper;
 import cn.chentyit.sdprms.model.entity.Manager;
+import cn.chentyit.sdprms.service.OverviewService;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import org.junit.Test;
@@ -28,6 +29,9 @@ public class ManagerSqlTest {
 
     @Resource
     private LambdaUpdateWrapper<Manager> lambdaUpdate;
+
+    @Resource
+    private OverviewService overviewService;
 
     @Test
     public void selectManagerByAccountAndPwd() {
@@ -60,5 +64,10 @@ public class ManagerSqlTest {
         lambdaQuery.select(Manager::getManagerId, Manager::getManagerName).like(Manager::getManagerName, "chen");
         Manager manager = managerMapper.selectOne(lambdaQuery);
         System.out.println(manager);
+    }
+
+    @Test
+    public void testNop() {
+        overviewService.getNopData();
     }
 }
