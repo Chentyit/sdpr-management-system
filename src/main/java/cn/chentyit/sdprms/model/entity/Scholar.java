@@ -1,6 +1,8 @@
 package cn.chentyit.sdprms.model.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -24,7 +26,7 @@ public class Scholar implements Serializable {
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
 
-    @TableField(value = "scholar_id")
+    @TableId(value = "scholar_id", type = IdType.AUTO)
     private int scholarId;
 
     @TableField(value = "scholar_name")

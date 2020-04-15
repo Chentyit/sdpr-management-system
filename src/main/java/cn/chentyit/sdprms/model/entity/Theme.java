@@ -18,7 +18,7 @@ import java.io.Serializable;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@TableName("thesis")
+@TableName("theme")
 public class Theme implements Serializable {
 
     @TableField(exist = false)
