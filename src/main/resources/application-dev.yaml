@@ -1,0 +1,6 @@
+logging:
+  level:
+    root: info
+    cn.chentyit.sdprms.dao: trace
+server:
+  port: 23333
