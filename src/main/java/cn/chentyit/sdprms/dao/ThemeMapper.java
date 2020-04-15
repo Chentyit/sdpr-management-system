@@ -1,5 +1,7 @@
 package cn.chentyit.sdprms.dao;
 
+import cn.chentyit.sdprms.model.entity.Theme;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
@@ -8,5 +10,5 @@ import org.apache.ibatis.annotations.Mapper;
  * @Description:
  */
 @Mapper
-public interface ThemeMapper {
+public interface ThemeMapper extends BaseMapper<Theme> {
 }
