@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head lang="en" id="public_overview_head">
+    <meta charset="utf-8"/>
+    <title>SDPR Manager System</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description"/>
+    <meta content="Coderthemes" name="author"/>
+    <!-- App favicon -->
+    <link rel="shortcut icon" th:href="@{images/favicon.ico}">
+
+    <!-- third party css -->
+    <link th:href="@{css/vendor/jquery-jvectormap-1.2.2.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{css/vendor/britecharts.min.css}" rel="stylesheet" type="text/css"/>
+    <!-- third party css end -->
+
+    <!-- App css -->
+    <link th:href="@{css/icons.min.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{css/app.min.css}" rel="stylesheet" type="text/css"/>
+</head>
+
+<body>
+<!-- Topbar Start -->
+<div class="navbar-custom topnav-navbar" id="public_topbar">
+    <div class="container-fluid">
+
+        <!-- LOGO -->
+        <a th:href="@{overview}" class="topnav-logo">
+            <span class="topnav-logo-lg">
+                <img th:src="@{images/logo-light.png}" alt="" height="16">
+            </span>
+            <span class="topnav-logo-sm">
+                <img th:src="@{images/logo_sm.png}" alt="" height="16">
+            </span>
+        </a>
+
+        <ul class="list-unstyled topbar-right-menu float-right mb-0">
+
+            <li class="dropdown notification-list">
+                <a class="nav-link dropdown-toggle nav-user arrow-none mr-0" data-toggle="dropdown" id="topbar-userdrop"
+                   href="#"
+                   role="button"
+                   aria-haspopup="true"
+                   aria-expanded="false">
+                    <span class="account-user-avatar">
+                        <img th:src="@{images/users/avatar-1.jpg}" alt="user-image" class="rounded-circle">
+                    </span>
+                    <span>
+                        <span class="account-user-name">[[ ${#strings.capitalize(session.manager.managerName)} ]]</span>
+                        <span class="account-position">Founder</span>
+                    </span>
+                </a>
+
+                <div class="dropdown-menu dropdown-menu-right dropdown-menu-animated topbar-dropdown-menu profile-dropdown"
+                     aria-labelledby="topbar-userdrop">
+                    <!-- item-->
+                    <div class=" dropdown-header noti-title">
+                        <h6 class="text-overflow m-0">Welcome !</h6>
+                    </div>
+
+                    <!-- item-->
+                    <a th:href="@{/recoverpw.html}" class="dropdown-item notify-item">
+                        <i class="mdi mdi-logout mr-1"></i>
+                        <span>Recover Password</span>
+                    </a>
+
+                    <!-- item-->
+                    <a th:href="@{/logout}" class="dropdown-item notify-item">
+                        <i class="mdi mdi-logout mr-1"></i>
+                        <span>Logout</span>
+                    </a>
+                </div>
+            </li>
+
+        </ul>
+        <a class="button-menu-mobile disable-btn">
+            <div class="lines">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </a>
+    </div>
+</div>
+<!-- end Topbar -->
+
+
+<div class="container-fluid">
+
+    <!-- Begin page -->
+    <div class="wrapper">
+
+        <!-- ============================================================== -->
+        <!-- Start Page Content here -->
+        <!-- ============================================================== -->
+
+        <!-- Start Content-->
+
+        <!-- ========== Left Sidebar Start ========== -->
+        <div class="left-side-menu" id="public_left">
+
+            <div class="leftbar-user">
+                <a href="#">
+                    <img th:src="@{images/users/avatar-1.jpg}" alt="user-image" height="42"
+                         class="rounded-circle shadow-sm">
+                    <span class="leftbar-user-name">Dominic Keller</span>
+                </a>
+            </div>
+
+            <!--- Sidemenu -->
+            <ul class="metismenu side-nav">
+
+                <!-- OverView -->
+                <li class="side-nav-item">
+                    <a href="overview.html" class="side-nav-link">
+                        <span> OverView </span>
+                    </a>
+                </li>
+
+                <!-- Thesis -->
+                <li class="side-nav-item">
+                    <a href="pages-thesis.html" class="side-nav-link">
+                        <span> Thesis </span>
+                    </a>
+                </li>
+
+                <!-- Scholar -->
+                <li class="side-nav-item">
+                    <a href="pages-scholar.html" class="side-nav-link">
+                        <span> Scholar </span>
+                    </a>
+                </li>
+
+                <!-- Theme -->
+                <li class="side-nav-item">
+                    <a href="pages-theme.html" class="side-nav-link">
+                        <span> Theme </span>
+                    </a>
+                </li>
+            </ul>
+
+            <div class="clearfix"></div>
+            <!-- Sidebar -left -->
+        </div>
+        <!-- Left Sidebar End -->
+
+    </div>
+</div>
+<!-- END Container -->
+
+</body>
+
+</html>
