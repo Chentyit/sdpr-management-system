@@ -1,6 +1,7 @@
 package cn.chentyit.sdprms;
 
 import cn.chentyit.sdprms.dao.ManagerMapper;
+import cn.chentyit.sdprms.dao.StatisticsMapper;
 import cn.chentyit.sdprms.model.entity.Manager;
 import cn.chentyit.sdprms.service.OverviewService;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
@@ -25,16 +26,11 @@ public class ManagerSqlTest {
     private ManagerMapper managerMapper;
 
     @Resource
-    private LambdaQueryWrapper<Manager> lambdaQuery;
-
-    @Resource
-    private LambdaUpdateWrapper<Manager> lambdaUpdate;
-
-    @Resource
     private OverviewService overviewService;
 
     @Test
     public void selectManagerByAccountAndPwd() {
+        LambdaQueryWrapper<Manager> lambdaQuery = new LambdaQueryWrapper<>();
         lambdaQuery.eq(Manager::getManagerName, "root").and(lqw -> lqw.eq(Manager::getManagerPassword, "root"));
         managerMapper.selectList(lambdaQuery).forEach(System.out::println);
     }
@@ -52,6 +48,7 @@ public class ManagerSqlTest {
 
     @Test
     public void recoverPwd() {
+        LambdaUpdateWrapper<Manager> lambdaUpdate = new LambdaUpdateWrapper<>();
         lambdaUpdate.eq(Manager::getManagerId, 666)
                 .eq(Manager::getManagerName, "chentyit")
                 .set(Manager::getManagerPassword, "chentyit123456");
@@ -61,6 +58,7 @@ public class ManagerSqlTest {
 
     @Test
     public void selectManagerByName() {
+        LambdaQueryWrapper<Manager> lambdaQuery = new LambdaQueryWrapper<>();
         lambdaQuery.select(Manager::getManagerId, Manager::getManagerName).like(Manager::getManagerName, "chen");
         Manager manager = managerMapper.selectOne(lambdaQuery);
         System.out.println(manager);
@@ -69,5 +67,10 @@ public class ManagerSqlTest {
     @Test
     public void testNop() {
         overviewService.getNopData();
+    }
+
+    @Test
+    public void testDofData() {
+        overviewService.getDofData().forEach(System.out::println);
     }
 }
