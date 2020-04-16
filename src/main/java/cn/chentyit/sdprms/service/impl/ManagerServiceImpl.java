@@ -21,17 +21,12 @@ public class ManagerServiceImpl implements ManagerService {
     @Resource
     private ManagerMapper managerMapper;
 
-    @Resource
-    private LambdaQueryWrapper<Manager> lambdaQuery;
-
-    @Resource
-    private LambdaUpdateWrapper<Manager> lambdaUpdate;
-
     @Override
     public Manager login(ManagerDTO managerDTO) {
+        LambdaQueryWrapper<Manager> lambdaQuery = new LambdaQueryWrapper<>();
         lambdaQuery.select(Manager::getManagerId, Manager::getManagerName)
-                .eq(Manager::getManagerName, "root")
-                .and(lqw -> lqw.eq(Manager::getManagerPassword, "root"));
+                .eq(Manager::getManagerName, managerDTO.getManagerName())
+                .and(lqw -> lqw.eq(Manager::getManagerPassword, managerDTO.getManagerPassword()));
         return managerMapper.selectOne(lambdaQuery);
     }
 
@@ -47,6 +42,8 @@ public class ManagerServiceImpl implements ManagerService {
 
     @Override
     public String recoverPwd(ManagerDTO managerDTO) {
+        LambdaQueryWrapper<Manager> lambdaQuery = new LambdaQueryWrapper<>();
+        LambdaUpdateWrapper<Manager> lambdaUpdate = new LambdaUpdateWrapper<>();
         // 先通过管理员姓名查出原数据信息
         lambdaQuery.select(Manager::getManagerName, Manager::getManagerEmail)
                 .like(Manager::getManagerEmail, managerDTO.getManagerEmail());

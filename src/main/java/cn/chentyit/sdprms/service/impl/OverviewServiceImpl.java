@@ -9,10 +9,12 @@ import cn.chentyit.sdprms.model.entity.Theme;
 import cn.chentyit.sdprms.model.entity.Thesis;
 import cn.chentyit.sdprms.model.pojo.NumberOfPublication;
 import cn.chentyit.sdprms.service.OverviewService;
+import cn.chentyit.sdprms.util.ResultPackTools;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,17 +39,12 @@ public class OverviewServiceImpl implements OverviewService {
     @Resource
     private ThesisMapper thesisMapper;
 
-    @Resource
-    private LambdaQueryWrapper<Scholar> scholarLambdaQuery;
-
-    @Resource
-    private LambdaQueryWrapper<Theme> themeLambdaQuery;
-
-    @Resource
-    private LambdaQueryWrapper<Thesis> thesisLambdaQuery;
-
     @Override
     public Map<String, Integer> getSummaryData() {
+        LambdaQueryWrapper<Scholar> scholarLambdaQuery = new LambdaQueryWrapper<>();
+        LambdaQueryWrapper<Theme> themeLambdaQuery = new LambdaQueryWrapper<>();
+        LambdaQueryWrapper<Thesis> thesisLambdaQuery = new LambdaQueryWrapper<>();
+
         Map<String, Integer> result = new HashMap<>(16);
 
         // 获取学者数量
@@ -69,8 +66,19 @@ public class OverviewServiceImpl implements OverviewService {
     }
 
     @Override
-    public List<NumberOfPublication> getNopData() {
-        statisticsMapper.getNumberOfPublication().forEach(System.out::println);
-        return null;
+    public List<Object> getNopData() {
+        LocalDateTime localDateTime = LocalDateTime.now();
+        List<NumberOfPublication> nopData = statisticsMapper.getNumberOfPublication(localDateTime.getYear() - 9);
+        List<Theme> themes = themeMapper.selectList(null);
+
+        Map<String, Map<String, Integer>> result = new HashMap<>(16);
+        for (Theme theme : themes) {
+            result.put(theme.getThemeName(), new HashMap<>(16));
+        }
+
+        for (NumberOfPublication data: nopData) {
+            result.get(data.getThemeName()).put(data.getThesisYear(), data.getNum());
+        }
+        return ResultPackTools.packMapToList(result);
     }
 }
