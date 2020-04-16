@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 /**
  * @Author Chentyit
  * @Date 2020/4/15 16:43
- * @Description:
+ * @Description: 数据库查询出来的数据数据映射类
  */
 @Data
 @Builder

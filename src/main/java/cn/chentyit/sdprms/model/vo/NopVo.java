@@ -11,7 +11,7 @@ import java.util.Map;
 /**
  * @Author Chentyit
  * @Date 2020/4/15 17:55
- * @Description:
+ * @Description: 主题逐年数据视图对象
  */
 @Data
 @Builder
