@@ -1,5 +1,6 @@
 package cn.chentyit.sdprms.dao;
 
+import cn.chentyit.sdprms.model.pojo.DistributionOfField;
 import cn.chentyit.sdprms.model.pojo.NumberOfPublication;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -20,4 +21,10 @@ public interface StatisticsMapper {
      * @return
      */
     List<NumberOfPublication> getNumberOfPublication(@Param("year") Integer year);
+
+    /**
+     * 获取领域研究对象分布
+     * @return
+     */
+    List<DistributionOfField> getDistributionOfField();
 }

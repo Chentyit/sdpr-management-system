@@ -15,4 +15,17 @@
         where te.theme_id = tab.theme_id
         order by te.theme_id, tab.thesis_year
     </select>
+
+    <select id="getDistributionOfField" resultType="cn.chentyit.sdprms.model.pojo.DistributionOfField">
+        select te.theme_id,
+               te.theme_name,
+               tab.num
+        from theme as te,
+             (
+                 select ts.theme_id, count(theme_id) as num
+                 from thesis as ts
+                 group by ts.theme_id
+             ) as tab
+        where te.theme_id = tab.theme_id
+    </select>
 </mapper>

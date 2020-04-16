@@ -1,6 +1,8 @@
 package cn.chentyit.sdprms.service;
 
+import cn.chentyit.sdprms.model.pojo.DistributionOfField;
 import cn.chentyit.sdprms.model.pojo.NumberOfPublication;
+import cn.chentyit.sdprms.model.vo.DofVo;
 
 import java.util.List;
 import java.util.Map;
@@ -23,4 +25,10 @@ public interface OverviewService {
      * @return
      */
     List<Object> getNopData();
+
+    /**
+     * 获取领域研究对象分布
+     * @return
+     */
+    List<DofVo> getDofData();
 }
