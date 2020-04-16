@@ -2,40 +2,122 @@ var options = {
     chart: {height: 380, type: "bar", toolbar: {show: !1}},
     plotOptions: {bar: {horizontal: !0}},
     dataLabels: {enabled: !1},
-    series: [{data: [400, 430, 448, 470, 540, 580, 690, 1100, 1200, 1380]}],
+    series: [
+        {
+            data: [400, 430, 448, 470, 540, 580, 690, 1100, 1200, 1380]
+        }
+    ],
     colors: ["#39afd1"],
-    xaxis: {categories: ["South Korea", "Canada", "United Kingdom", "Netherlands", "Italy", "France", "Japan", "United States", "China", "Germany"]},
-    states: {hover: {filter: "none"}},
-    grid: {borderColor: "#f1f3fa"}
+    xaxis: {
+        categories: ["South Korea", "Canada", "United Kingdom", "Netherlands", "Italy", "France", "Japan", "United States", "China", "Germany"]
+    },
+    states: {
+        hover: {
+            filter: "none"
+        }
+    },
+    grid: {
+        borderColor: "#f1f3fa"
+    }
 };
+
 (chart = new ApexCharts(document.querySelector("#basic-bar"), options)).render();
+
 options = {
-    chart: {height: 380, type: "bar", toolbar: {show: !1}},
-    plotOptions: {bar: {horizontal: !0, dataLabels: {position: "top"}}},
-    dataLabels: {enabled: !0, offsetX: -6, style: {fontSize: "12px", colors: ["#fff"]}},
+    chart: {
+        height: 380,
+        type: "bar",
+        toolbar: {
+            show: !1
+        }
+    },
+    plotOptions: {
+        bar: {
+            horizontal: !0,
+            dataLabels: {
+                position: "top"
+            }
+        }
+    },
+    dataLabels: {
+        enabled: !0,
+        offsetX: -6,
+        style: {
+            fontSize: "12px",
+            colors: ["#fff"]
+        }
+    },
     colors: ["#fa5c7c", "#6c757d"],
-    stroke: {show: !0, width: 1, colors: ["#fff"]},
-    series: [{name: "Series 1", data: [44, 55, 41, 64, 22, 43, 21]}, {
-        name: "Series 2",
-        data: [53, 32, 33, 52, 13, 44, 32]
-    }],
-    xaxis: {categories: [2001, 2002, 2003, 2004, 2005, 2006, 2007]},
-    legend: {offsetY: -10},
-    states: {hover: {filter: "none"}},
-    grid: {borderColor: "#f1f3fa"}
+    stroke: {
+        show: !0,
+        width: 1,
+        colors: ["#fff"]
+    },
+    series: [
+        {
+            name: "Series 1",
+            data: [44, 55, 41, 64, 22, 43, 21]
+        },
+        {
+            name: "Series 2",
+            data: [53, 32, 33, 52, 13, 44, 32]
+        }
+    ],
+    xaxis: {
+        categories: [2001, 2002, 2003, 2004, 2005, 2006, 2007]
+    },
+    legend: {
+        offsetY: -10
+    },
+    states: {
+        hover: {
+            filter: "none"
+        }
+    },
+    grid: {
+        borderColor: "#f1f3fa"
+    }
 };
+
 (chart = new ApexCharts(document.querySelector("#grouped-bar"), options)).render();
+
 options = {
-    chart: {height: 380, type: "bar", stacked: !0, toolbar: {show: !1}},
-    plotOptions: {bar: {horizontal: !0}},
+    chart: {
+        height: 380,
+        type: "bar",
+        stacked: !0,
+        toolbar: {
+            show: !1
+        }
+    },
+    plotOptions: {
+        bar: {
+            horizontal: !0
+        }
+    },
     stroke: {show: !1},
-    series: [{name: "Marine Sprite", data: [44, 55, 41, 37, 22, 43, 21]}, {
-        name: "Striking Calf",
-        data: [53, 32, 33, 52, 13, 43, 32]
-    }, {name: "Tank Picture", data: [12, 17, 11, 9, 15, 11, 20]}, {
-        name: "Bucket Slope",
-        data: [9, 7, 5, 8, 6, 9, 4]
-    }, {name: "Reborn Kid", data: [25, 12, 19, 32, 25, 24, 10]}],
+    series: [
+        {
+            name: "Marine Sprite",
+            data: [44, 55, 41, 37, 22, 43, 21]
+        },
+        {
+            name: "Striking Calf",
+            data: [53, 32, 33, 52, 13, 43, 32]
+
+        },
+        {
+            name: "Tank Picture", data: [12, 17, 11, 9, 15, 11, 20]
+        },
+        {
+            name: "Bucket Slope",
+            data: [9, 7, 5, 8, 6, 9, 4]
+        },
+        {
+            name: "Reborn Kid",
+            data: [25, 12, 19, 32, 25, 24, 10]
+        }
+    ],
     xaxis: {
         categories: [2008, 2009, 2010, 2011, 2012, 2013, 2014], labels: {
             formatter: function (e) {
@@ -43,7 +125,11 @@ options = {
             }
         }
     },
-    yaxis: {title: {text: void 0}},
+    yaxis: {
+        title: {
+            text: void 0
+        }
+    },
     colors: ["#727cf5", "#0acf97", "#fa5c7c", "#6c757d", "#39afd1"],
     tooltip: {
         y: {
@@ -52,11 +138,23 @@ options = {
             }
         }
     },
-    fill: {opacity: 1},
-    states: {hover: {filter: "none"}},
-    legend: {position: "top", horizontalAlign: "center"},
-    grid: {borderColor: "#f1f3fa"}
+    fill: {
+        opacity: 1
+    },
+    states: {
+        hover: {
+            filter: "none"
+        }
+    },
+    legend: {
+        position: "top",
+        horizontalAlign: "center"
+    },
+    grid: {
+        borderColor: "#f1f3fa"
+    }
 };
+
 (chart = new ApexCharts(document.querySelector("#stacked-bar"), options)).render();
 options = {
     chart: {height: 380, type: "bar", stacked: !0, stackType: "100%", toolbar: {show: !1}},
