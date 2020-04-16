@@ -7,7 +7,6 @@ import cn.chentyit.sdprms.dao.ThesisMapper;
 import cn.chentyit.sdprms.model.entity.Scholar;
 import cn.chentyit.sdprms.model.entity.Theme;
 import cn.chentyit.sdprms.model.entity.Thesis;
-import cn.chentyit.sdprms.model.pojo.DistributionOfField;
 import cn.chentyit.sdprms.model.pojo.NumberOfPublication;
 import cn.chentyit.sdprms.model.vo.DofVo;
 import cn.chentyit.sdprms.service.OverviewService;
@@ -81,7 +80,7 @@ public class OverviewServiceImpl implements OverviewService {
         for (NumberOfPublication data: nopData) {
             result.get(data.getThemeName()).put(data.getThesisYear(), data.getNum());
         }
-        return ResultPackTools.packNopMapToList(result);
+        return ResultPackTools.packDataMapToDataList(result);
     }
 
     @Override

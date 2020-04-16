@@ -38,7 +38,7 @@ public class ResultPackTools {
      * @param data
      * @return
      */
-    public static List<Object> packNopMapToList(Map<String, Map<String, Integer>> data) {
+    public static List<Object> packDataMapToDataList(Map<String, Map<String, Integer>> data) {
         List<Object> result = new ArrayList<>();
 
         /*

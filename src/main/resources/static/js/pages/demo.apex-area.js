@@ -1,8 +1,5 @@
-
-
 function getNopData() {
-
-    options = {
+    let options_nop = {
         chart: {
             height: 380,
             type: "area"
@@ -49,6 +46,43 @@ function getNopData() {
         }
     };
 
+    let options_rpof = {
+        chart: {
+            height: 380,
+            type: "bar",
+            stacked: !0,
+            stackType: "100%",
+            toolbar: {
+                show: !1
+            }
+        },
+        plotOptions: {
+            bar: {
+                horizontal: !0
+            }
+        },
+        stroke: {
+            width: 1,
+            colors: ["#fff"]
+        },
+        series: [],
+        xaxis: {
+            categories: []
+        },
+        colors: ["#ffbc00", "#39afd1", "#6c757d", "#e3eaef", "#727cf5"],
+        tooltip: {
+            y: {
+                formatter: function (e) {
+                    return e + "K"
+                }
+            }
+        },
+        fill: {opacity: 1},
+        states: {hover: {filter: "none"}},
+        legend: {position: "top", horizontalAlign: "center"},
+        grid: {borderColor: "#f1f3fa"}
+    };
+
     $.ajax({
         "type": "post",
         "dataType": "json",
@@ -57,7 +91,12 @@ function getNopData() {
         "async": false,
         "success": function (data) {
             for (let i = 0; i < data.length; i++) {
-                options['series'].push({
+                options_nop['series'].push({
+                    name: data[i].themeName,
+                    data: data[i].nums
+                })
+
+                options_rpof['series'].push({
                     name: data[i].themeName,
                     data: data[i].nums
                 })
@@ -66,7 +105,9 @@ function getNopData() {
             let date = new Date;
             let year = date.getFullYear();
             for (let i = year - 9; i <= year; i++) {
-                options['xaxis']['categories'].push(i);
+                options_nop['xaxis']['categories'].push(i);
+
+                options_rpof['xaxis']['categories'].push(i);
             }
         },
         "error": function (data) {
@@ -74,10 +115,11 @@ function getNopData() {
         }
     })
 
-    return options
+    return [options_nop, options_rpof]
 }
 
 $(function () {
-    options = getNopData();
-    (chart = new ApexCharts(document.querySelector("#spline-area"), options)).render();
+    options_list = getNopData();
+    (chart = new ApexCharts(document.querySelector("#spline-area"), options_list[0])).render();
+    (chart = new ApexCharts(document.querySelector("#full-stacked-bar"), options_list[1])).render();
 })
