@@ -1,20 +1,6 @@
-series_1 = [31, 40, 28, 51, 42, 109, 100, 40, 28, 51]
-series_2 = [11, 32, 45, 32, 34, 52, 666, 32, 34, 52]
 
-series = [
-    {
-        name: "A",
-        data: series_1
-    },
-    {
-        name: "B",
-        data: series_2
-    }
-]
 
-years = ["2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020"]
-
-$(function () {
+function getNopData() {
 
     options = {
         chart: {
@@ -28,13 +14,25 @@ $(function () {
             width: 3,
             curve: "smooth"
         },
-        colors: ["#727cf5", "#6c757d"],
-        series: series,
+        colors: [
+            "#74b9ff",
+            "#0984e3",
+            "#ff7675",
+            "#d63031",
+            "#a29bfe",
+            "#6c5ce7",
+            "#fd79a8",
+            "#e84393",
+            "#00cec9",
+            "#fab1a0",
+            "#e17055"
+        ],
+        series: [],
         legend: {
             offsetY: -10
         },
         xaxis: {
-            categories: years
+            categories: []
         },
         tooltip: {
             fixed: {
@@ -44,14 +42,42 @@ $(function () {
         },
         grid: {
             row: {
-                colors: ["transparent", "transparent"], opacity: .2
+                colors: ["transparent", "transparent"],
+                opacity: .2
             },
             borderColor: "#f1f3fa"
         }
     };
 
-    options['series'] = series;
-    options['xaxis']['categories'] = years;
+    $.ajax({
+        "type": "post",
+        "dataType": "json",
+        "contentType" : "application/json",
+        "url": "/sdpr/getNopData",
+        "async": false,
+        "success": function (data) {
+            for (let i = 0; i < data.length; i++) {
+                options['series'].push({
+                    name: data[i].themeName,
+                    data: data[i].nums
+                })
+            }
 
+            let date = new Date;
+            let year = date.getFullYear();
+            for (let i = year - 9; i <= year; i++) {
+                options['xaxis']['categories'].push(i);
+            }
+        },
+        "error": function (data) {
+            console.log(data)
+        }
+    })
+
+    return options
+}
+
+$(function () {
+    options = getNopData();
     (chart = new ApexCharts(document.querySelector("#spline-area"), options)).render();
 })

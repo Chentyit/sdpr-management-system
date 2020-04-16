@@ -5,9 +5,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -30,9 +32,9 @@ public class OverViewController {
         return modelAndView;
     }
 
-    @GetMapping("/sdpr/getSummaryData")
+    @PostMapping("/sdpr/getNopData")
     @ResponseBody
-    public Map<String, Integer> getSummaryData() {
-        return overviewService.getSummaryData();
+    public List<Object> getNopData() {
+        return overviewService.getNopData();
     }
 }

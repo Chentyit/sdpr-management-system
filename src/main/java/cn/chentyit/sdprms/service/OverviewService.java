@@ -22,5 +22,5 @@ public interface OverviewService {
      * 获取每年各个主题数数量
      * @return
      */
-    List<NumberOfPublication> getNopData();
+    List<Object> getNopData();
 }
