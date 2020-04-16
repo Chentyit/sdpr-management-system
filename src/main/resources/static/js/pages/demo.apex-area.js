@@ -53,7 +53,7 @@ function getNopData() {
         "type": "post",
         "dataType": "json",
         "contentType" : "application/json",
-        "url": "/sdpr/getNopData",
+        "url": "/sta/getNopData",
         "async": false,
         "success": function (data) {
             for (let i = 0; i < data.length; i++) {
