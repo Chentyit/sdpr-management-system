@@ -3,13 +3,14 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="cn.chentyit.sdprms.dao.StatisticsMapper">
 
-    <select id="getNumberOfPublication" resultType="cn.chentyit.sdprms.model.pojo.NumberOfPublication">
+    <select id="getNumberOfPublication" parameterType="Integer" resultType="cn.chentyit.sdprms.model.pojo.NumberOfPublication">
         select te.theme_name, tab.thesis_year, tab.num
         from theme as te,
              (
                  select ts.thesis_year, ts.theme_id, count(ts.theme_id) as num
                  from thesis as ts
                  group by ts.theme_id, ts.thesis_year
+                 having ts.thesis_year >= #{year}
              ) as tab
         where te.theme_id = tab.theme_id
         order by te.theme_id, tab.thesis_year
