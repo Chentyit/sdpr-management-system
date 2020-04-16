@@ -1,9 +1,4 @@
 spring:
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://120.79.208.205:3306/repository?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&serverTimezone=Asia/Shanghai&useSSL=false&nullCatalogMeansCurrent=true
-    username: root
-    password: Chentyit123456
   profiles:
     active: dev
 mybatis-plus:
