@@ -1,5 +1,6 @@
 package cn.chentyit.sdprms.controller;
 
+import cn.chentyit.sdprms.model.vo.DofVo;
 import cn.chentyit.sdprms.service.OverviewService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * @Author Chentyit
@@ -32,9 +32,15 @@ public class OverViewController {
         return modelAndView;
     }
 
-    @PostMapping("/sdpr/getNopData")
     @ResponseBody
+    @PostMapping("/sta/getNopData")
     public List<Object> getNopData() {
         return overviewService.getNopData();
+    }
+
+    @ResponseBody
+    @PostMapping("/sta/getDofData")
+    public List<DofVo> getDofVo() {
+        return overviewService.getDofData();
     }
 }
