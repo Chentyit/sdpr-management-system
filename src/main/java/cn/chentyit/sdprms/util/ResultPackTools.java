@@ -4,8 +4,14 @@ import cn.chentyit.sdprms.model.pojo.DistributionOfField;
 import cn.chentyit.sdprms.model.vo.DofVo;
 import cn.chentyit.sdprms.model.vo.NopVo;
 
+import javax.activation.MimetypesFileTypeMap;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -106,5 +112,34 @@ public class ResultPackTools {
         result.forEach(dofVo -> dofVo.setPercentage(dofVo.getNum() / finalSum));
 
         return result;
+    }
+
+    /**
+     * 下载 Json 文件
+     */
+    public static void downloadJsonFile(HttpServletResponse response, String fileName, String jsonStr) throws IOException {
+
+        // 设置信息给客户端不解析
+        String type = new MimetypesFileTypeMap().getContentType(fileName);
+        // 设置 Content-type，即告诉客户端所发送的数据属于什么类型
+        response.setHeader("Content-type",type);
+        // 设置编码
+        String code = new String(fileName.getBytes(StandardCharsets.UTF_8), StandardCharsets.ISO_8859_1);
+        // 设置扩展头，当Content-Type 的类型为要下载的类型时 , 这个信息头会告诉浏览器这个文件的名字和类型。
+        response.setHeader("Content-Disposition", "attachment;filename=" + code);
+
+        // 创建字符流（尝试过字节流，但是字节流会丢失数据，就改用字符流了）
+        BufferedReader br = new BufferedReader(new InputStreamReader(new ByteArrayInputStream(jsonStr.getBytes())));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(response.getOutputStream()));
+        String line = br.readLine();
+
+        while (line != null) {
+            bw.write(line);
+            line = br.readLine();
+        }
+
+        // 关闭流
+        br.close();
+        bw.close();
     }
 }

@@ -34,4 +34,9 @@ public class ThesisApiTest {
     public void deleteThesisByIds() {
         System.out.println(thesisService.deleteThesisById(Arrays.asList(666, 667, 668)));
     }
+
+    @Test
+    public void findThesisById() {
+        System.out.println(thesisService.findThesisById(0));
+    }
 }

@@ -5,6 +5,8 @@ import cn.chentyit.sdprms.model.entity.Thesis;
 import cn.chentyit.sdprms.model.vo.ThesisVo;
 import cn.chentyit.sdprms.service.ThemeService;
 import cn.chentyit.sdprms.service.ThesisService;
+import cn.chentyit.sdprms.util.ResultPackTools;
+import com.google.gson.Gson;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.activation.MimetypesFileTypeMap;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 /**
@@ -93,5 +100,13 @@ public class ThesisController {
         } else {
             return "修改或添加失败";
         }
+    }
+
+    @GetMapping("/thesis/download/{fileName}")
+    public void downloadFile(HttpServletResponse response, @PathVariable("fileName") String fileName) throws IOException {
+        List<Thesis> allThesis = thesisService.getAllThesis();
+        String thesisJson = new Gson().toJson(allThesis);
+
+        ResultPackTools.downloadJsonFile(response, fileName, thesisJson);
     }
 }
