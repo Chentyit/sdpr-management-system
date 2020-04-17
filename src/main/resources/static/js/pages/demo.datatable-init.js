@@ -9,7 +9,6 @@ $(document).ready(
                     $(".dataTables_paginate > .pagination").addClass("pagination-rounded")
                 }
             }
-        ), 
-        a.buttons().container().appendTo("#datatable-buttons_wrapper .col-md-6:eq(0)")
+        )
     }
 );

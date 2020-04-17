@@ -19,6 +19,48 @@
     <link th:href="@{css/icons.min.css}" rel="stylesheet" type="text/css"/>
     <link th:href="@{css/app.min.css}" rel="stylesheet" type="text/css"/>
 
+    <!-- JQuery WebJar -->
+    <script th:src="@{/webjars/jquery/3.4.1/jquery.js}"></script>
+</head>
+
+<head lang="en" id="public_thesis_head">
+    <meta charset="utf-8"/>
+    <title>Hyper - Responsive Bootstrap 4 Admin Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description"/>
+    <meta content="Coderthemes" name="author"/>
+    <!-- App favicon -->
+    <link rel="shortcut icon" th:href="@{images/favicon.ico}">
+
+    <!-- third party css -->
+    <link th:href="@{css/vendor/dataTables.bootstrap4.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{css/vendor/responsive.bootstrap4.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{css/vendor/buttons.bootstrap4.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{css/vendor/select.bootstrap4.css}" rel="stylesheet" type="text/css"/>
+    <!-- third party css end -->
+
+    <!-- App css -->
+    <link th:href="@{css/icons.min.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{css/app.min.css}" rel="stylesheet" type="text/css"/>
+
+    <!-- JQuery WebJar -->
+    <script th:src="@{/webjars/jquery/3.4.1/jquery.js}"></script>
+</head>
+
+<head lang="en" id="public_thesis_details_head">
+    <meta charset="utf-8"/>
+    <title>Hyper - Responsive Bootstrap 4 Admin Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description"/>
+    <meta content="Coderthemes" name="author"/>
+    <!-- App favicon -->
+    <link rel="shortcut icon" th:href="@{images/favicon.ico}">
+
+    <!-- App css -->
+    <link th:href="@{css/icons.min.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{css/app.min.css}" rel="stylesheet" type="text/css"/>
+
+    <!-- JQuery WebJar -->
     <script th:src="@{/webjars/jquery/3.4.1/jquery.js}"></script>
 </head>
 
@@ -115,14 +157,14 @@
 
                 <!-- OverView -->
                 <li class="side-nav-item">
-                    <a href="overview.html" class="side-nav-link">
+                    <a th:href="@{/overview}" class="side-nav-link">
                         <span> OverView </span>
                     </a>
                 </li>
 
                 <!-- Thesis -->
                 <li class="side-nav-item">
-                    <a href="pages-thesis.html" class="side-nav-link">
+                    <a th:href="@{/thesis}" class="side-nav-link">
                         <span> Thesis </span>
                     </a>
                 </li>
@@ -146,6 +188,21 @@
             <!-- Sidebar -left -->
         </div>
         <!-- Left Sidebar End -->
+
+        <footer class="footer" id="public_footer">
+            <div class="row">
+                <div class="col-md-6">
+                    2018 - 2019 © Hyper - Coderthemes.com
+                </div>
+                <div class="col-md-6">
+                    <div class="text-md-right footer-links d-none d-md-block">
+                        <a href="javascript: void(0);">About</a>
+                        <a href="javascript: void(0);">Support</a>
+                        <a href="javascript: void(0);">Contact Us</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
 
     </div>
 </div>

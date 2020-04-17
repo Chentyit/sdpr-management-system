@@ -52,7 +52,6 @@ let briteChartApp = window.briteChartApp || {};
                 "url": "/sta/getDofData",
                 "async": false,
                 "success": function (data) {
-                    console.log(data);
                     for (let i = 0; i < data.length; i++) {
                         data_result.push({
                             id: data[i].themeId,
@@ -61,7 +60,6 @@ let briteChartApp = window.briteChartApp || {};
                             percentage: data[i].percentage
                         })
                     }
-                    console.log(l);
                 },
                 "error": function (data) {
                 }
