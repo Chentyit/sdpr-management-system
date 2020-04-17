@@ -1,6 +1,9 @@
 package cn.chentyit.sdprms.controller;
 
+import cn.chentyit.sdprms.model.dto.ThesisDTO;
 import cn.chentyit.sdprms.model.entity.Thesis;
+import cn.chentyit.sdprms.model.vo.ThesisVo;
+import cn.chentyit.sdprms.service.ThemeService;
 import cn.chentyit.sdprms.service.ThesisService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,6 +25,7 @@ import java.util.List;
 public class ThesisController {
 
     private final ThesisService thesisService;
+    private final ThemeService themeService;
 
     @GetMapping("/thesis")
     public ModelAndView thesisPage() {
@@ -43,6 +47,51 @@ public class ThesisController {
             return "redirect:/thesis";
         } else {
             return "删除失败";
+        }
+    }
+
+    @GetMapping("/thesis-details/{thesisId}")
+    public ModelAndView thesisDetails(@PathVariable("thesisId") int thesisId) {
+        ModelAndView modelAndView = new ModelAndView();
+        Thesis thesis = thesisService.findThesisById(thesisId);
+        // 判断是否数据库中是否有该记录
+        if (thesis != null) {
+            // 将数据库映射对象转化为 Vo 视图对象
+            ThesisVo thesisVo = ThesisVo.builder()
+                    .thesisId(thesis.getThesisId())
+                    .thesisTitle(thesis.getThesisTitle())
+                    .themeId(thesis.getThemeId())
+                    .thesisAuthor(thesis.getThesisAuthor())
+                    .thesisDigest(thesis.getThesisDigest())
+                    .thesisClassic(thesis.getThesisClassic())
+                    .thesisBooktitle(thesis.getThesisBooktitle())
+                    .thesisOrganization(thesis.getThesisOrganization())
+                    .thesisPublisher(thesis.getThesisPublisher())
+                    .thesisJournal(thesis.getThesisJournal())
+                    .thesisVolume(thesis.getThesisVolume())
+                    .thesisNumber(thesis.getThesisNumber())
+                    .thesisPages(thesis.getThesisPages())
+                    .thesisYear(thesis.getThesisYear())
+                    .thesisDoi(thesis.getThesisDoi())
+                    .thesisBibtex(thesis.getThesisBibtex())
+                    .build();
+            modelAndView.addObject("thesisVo", thesisVo);
+        } else {
+            modelAndView.addObject("thesisVo", new ThesisVo());
+        }
+        // 获取所有主题
+        modelAndView.addObject("themes", themeService.getAllTheme());
+        modelAndView.setViewName("thesis/thesis-details");
+        return modelAndView;
+    }
+
+    @PostMapping("/thesis-detail")
+    public String updateOrInsertThesis(ThesisDTO thesisDTO) {
+        int rows = thesisService.saveOrUpdateThesis(thesisDTO);
+        if (rows != 0) {
+            return "redirect:/thesis";
+        } else {
+            return "修改或添加失败";
         }
     }
 }

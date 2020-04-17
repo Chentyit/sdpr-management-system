@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head lang="en" th:replace="overview/public :: #public_thesis_details_head">
+</head>
+
+<body>
+
+<!-- Topbar Start -->
+<div class="navbar-custom topnav-navbar" th:replace="overview/public :: #public_topbar">
+</div>
+<!-- end Topbar -->
+
+
+<div class="container-fluid">
+
+    <!-- Begin page -->
+    <div class="wrapper">
+
+        <!-- ============================================================== -->
+        <!-- Start Page Content here -->
+        <!-- ============================================================== -->
+
+        <!-- Start Content-->
+
+        <!-- ========== Left Sidebar Start ========== -->
+        <div class="left-side-menu" th:replace="overview/public :: #public_left">
+        </div>
+        <!-- Left Sidebar End -->
+
+        <div class="content-page">
+            <div class="content">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <form th:action="@{/thesis-detail}" class="needs-validation" th:object="${thesisVo}"
+                                      th:method="post">
+                                    <div class="form-group mb-3">
+                                        <label for="example-readonly">论文信息 ID</label>
+                                        <input type="text" class="form-control" id="example-readonly" readonly=""
+                                               placeholder="论文信息 ID" th:value="*{thesisId}" name="thesisId" required>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="validationCustom02">论文标题</label>
+                                        <input type="text" class="form-control" id="validationCustom02"
+                                               placeholder="论文标题" th:value="*{thesisTitle}" name="thesisTitle" required>
+                                        <div class="valid-feedback">
+                                            请输入论文标题，不允许为空
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="validationCustom03">论文主题 ID</label>
+                                        <select id="validationCustom03" class="form-control custom-select"
+                                                name="themeId" required>
+                                            <option th:each="theme : ${themes}"
+                                                    th:selected="${theme.themeId} eq *{themeId}"
+                                                    th:value="${theme.themeId}"
+                                                    th:text="${theme.themeName}"></option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            请输入论文主题 Id，不允许为空
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="validationCustom04">论文作者（不同作者请用英文逗号分隔）</label>
+                                        <input type="text" class="form-control" id="validationCustom04"
+                                               placeholder="论文作者（不同作者请用英文逗号分隔）"
+                                               th:value="*{thesisAuthor}" name="thesisAuthor" required>
+                                        <div class="invalid-feedback">
+                                            请输入论文作者，不允许为空
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="validationCustom05">论文摘要</label>
+                                        <input type="text" class="form-control" id="validationCustom05"
+                                               placeholder="论文摘要" th:value="*{thesisDigest}" name="thesisDigest">
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="validationCustom06">论文来源种类</label>
+                                        <input type="text" class="form-control" id="validationCustom06"
+                                               placeholder="论文来源种类" th:value="*{thesisClassic}" name="thesisClassic"
+                                               required>
+                                        <div class="invalid-feedback">
+                                            请输入论文来源种类，不允许为空
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="validationCustom07">会议名称</label>
+                                        <input type="text" class="form-control" id="validationCustom07"
+                                               placeholder="会议名称" th:value="*{thesisBooktitle}" name="thesisBooktitle">
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="validationCustom08">会议来源</label>
+                                        <input type="text" class="form-control" id="validationCustom08"
+                                               placeholder="会议来源" th:value="*{thesisOrganization}"
+                                               name="thesisOrganization">
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="validationCustom09">期刊来源</label>
+                                        <input type="text" class="form-control" id="validationCustom09"
+                                               placeholder="期刊来源" th:value="*{thesisPublisher}" name="thesisPublisher">
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="validationCustom10">期刊种类</label>
+                                        <input type="text" class="form-control" id="validationCustom10"
+                                               placeholder="期刊种类" th:value="*{thesisJournal}" name="thesisJournal">
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="validationCustom11">期刊卷号</label>
+                                        <input type="text" class="form-control" id="validationCustom11"
+                                               placeholder="期刊卷号" th:value="*{thesisVolume}" name="thesisVolume">
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="validationCustom12">期刊期号</label>
+                                        <input type="text" class="form-control" id="validationCustom12"
+                                               placeholder="期刊期号" th:value="*{thesisNumber}" name="thesisNumber">
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="validationCustom13">论文页码</label>
+                                        <input type="text" class="form-control" id="validationCustom13"
+                                               placeholder="论文页码" th:value="*{thesisPages}" name="thesisPages">
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="validationCustom14">论文发布时间（只需要年份）</label>
+                                        <input type="text" class="form-control" id="validationCustom14"
+                                               placeholder="论文发布时间（只需要年份）" th:value="*{thesisYear}" name="thesisYear"
+                                               required>
+                                        <div class="invalid-feedback">
+                                            请输入论文发布时间（只需要年份）
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="validationCustom15">论文链接</label>
+                                        <input type="text" class="form-control" id="validationCustom15"
+                                               placeholder="论文链接" th:value="*{thesisDoi}" name="thesisDoi">
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="validationCustom16">论文 BibTex 信息</label>
+                                        <textarea class="form-control" id="validationCustom16" rows="12" required
+                                                  th:text="*{thesisBibtex}" name="thesisBibtex">
+                                        </textarea>
+                                        <div class="invalid-feedback">
+                                            请输入论文 BibTex 信息，不允许为空
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <div class="custom-control custom-checkbox form-check">
+                                            <input type="checkbox" class="custom-control-input" id="invalidCheck"
+                                                   required>
+                                            <label class="custom-control-label" for="invalidCheck">请再次确认是否保存</label>
+                                            <div class="invalid-feedback">
+                                                你必须同意才能继续操作
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-primary" type="submit">提交</button>
+                                </form>
+                            </div> <!-- end card-body-->
+                        </div> <!-- end card-->
+                    </div> <!-- end col-->
+                </div>
+                <!-- end row-->
+            </div> <!-- content -->
+
+            <!-- Footer Start -->
+            <footer class="footer" th:replace="overview/public :: #public_footer">
+            </footer>
+            <!-- end Footer -->
+        </div> <!-- content-page -->
+
+    </div>
+</div>
+<!-- END Container -->
+
+<!-- App js -->
+<script th:src="@{/js/app.min.js}"></script>
+</body>
+
+</html>

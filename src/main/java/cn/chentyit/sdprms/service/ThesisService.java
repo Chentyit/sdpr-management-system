@@ -1,5 +1,6 @@
 package cn.chentyit.sdprms.service;
 
+import cn.chentyit.sdprms.model.dto.ThesisDTO;
 import cn.chentyit.sdprms.model.entity.Thesis;
 
 import java.util.List;
@@ -25,4 +26,20 @@ public interface ThesisService {
      * @return
      */
     int deleteThesisById(List<Integer> ids);
+
+    /**
+     * 根据 Id 查询论文信息
+     *
+     * @param thesisId 论文 Id
+     * @return
+     */
+    Thesis findThesisById(int thesisId);
+
+    /**
+     * 修改或插入数据
+     *
+     * @param thesisDTO
+     * @return
+     */
+    int saveOrUpdateThesis(ThesisDTO thesisDTO);
 }
