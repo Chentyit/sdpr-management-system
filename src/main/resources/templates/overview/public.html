@@ -11,13 +11,13 @@
     <link rel="shortcut icon" th:href="@{images/favicon.ico}">
 
     <!-- third party css -->
-    <link th:href="@{css/vendor/jquery-jvectormap-1.2.2.css}" rel="stylesheet" type="text/css"/>
-    <link th:href="@{css/vendor/britecharts.min.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/css/vendor/jquery-jvectormap-1.2.2.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/css/vendor/britecharts.min.css}" rel="stylesheet" type="text/css"/>
     <!-- third party css end -->
 
     <!-- App css -->
-    <link th:href="@{css/icons.min.css}" rel="stylesheet" type="text/css"/>
-    <link th:href="@{css/app.min.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/css/icons.min.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/css/app.min.css}" rel="stylesheet" type="text/css"/>
 
     <!-- JQuery WebJar -->
     <script th:src="@{/webjars/jquery/3.4.1/jquery.js}"></script>
@@ -33,35 +33,32 @@
     <link rel="shortcut icon" th:href="@{images/favicon.ico}">
 
     <!-- third party css -->
-    <link th:href="@{css/vendor/dataTables.bootstrap4.css}" rel="stylesheet" type="text/css"/>
-    <link th:href="@{css/vendor/responsive.bootstrap4.css}" rel="stylesheet" type="text/css"/>
-    <link th:href="@{css/vendor/buttons.bootstrap4.css}" rel="stylesheet" type="text/css"/>
-    <link th:href="@{css/vendor/select.bootstrap4.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/css/vendor/dataTables.bootstrap4.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/css/vendor/responsive.bootstrap4.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/css/vendor/buttons.bootstrap4.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/css/vendor/select.bootstrap4.css}" rel="stylesheet" type="text/css"/>
     <!-- third party css end -->
 
     <!-- App css -->
-    <link th:href="@{css/icons.min.css}" rel="stylesheet" type="text/css"/>
-    <link th:href="@{css/app.min.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/css/icons.min.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/css/app.min.css}" rel="stylesheet" type="text/css"/>
 
     <!-- JQuery WebJar -->
     <script th:src="@{/webjars/jquery/3.4.1/jquery.js}"></script>
 </head>
 
 <head lang="en" id="public_thesis_details_head">
-    <meta charset="utf-8"/>
+    <meta charset="utf-8" />
     <title>Hyper - Responsive Bootstrap 4 Admin Dashboard</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description"/>
-    <meta content="Coderthemes" name="author"/>
+    <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
+    <meta content="Coderthemes" name="author" />
     <!-- App favicon -->
-    <link rel="shortcut icon" th:href="@{images/favicon.ico}">
+    <link rel="shortcut icon" th:href="@{/images/favicon.ico}">
 
     <!-- App css -->
-    <link th:href="@{css/icons.min.css}" rel="stylesheet" type="text/css"/>
-    <link th:href="@{css/app.min.css}" rel="stylesheet" type="text/css"/>
-
-    <!-- JQuery WebJar -->
-    <script th:src="@{/webjars/jquery/3.4.1/jquery.js}"></script>
+    <link th:href="@{/css/icons.min.css}" rel="stylesheet" type="text/css" />
+    <link th:href="@{/css/app.min.css}" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
@@ -72,10 +69,10 @@
         <!-- LOGO -->
         <a th:href="@{/overview}" class="topnav-logo">
             <span class="topnav-logo-lg">
-                <img th:src="@{images/logo-light.png}" alt="" height="16">
+                <img th:src="@{/images/logo-light.png}" alt="" height="16">
             </span>
             <span class="topnav-logo-sm">
-                <img th:src="@{images/logo_sm.png}" alt="" height="16">
+                <img th:src="@{/images/logo_sm.png}" alt="" height="16">
             </span>
         </a>
 
@@ -88,7 +85,7 @@
                    aria-haspopup="true"
                    aria-expanded="false">
                     <span class="account-user-avatar">
-                        <img th:src="@{images/users/avatar-1.jpg}" alt="user-image" class="rounded-circle">
+                        <img th:src="@{/images/users/avatar-1.jpg}" alt="user-image" class="rounded-circle">
                     </span>
                     <span>
                         <span class="account-user-name">[[ ${#strings.capitalize(session.manager.managerName)} ]]</span>
@@ -146,7 +143,7 @@
 
             <div class="leftbar-user">
                 <a href="#">
-                    <img th:src="@{images/users/avatar-1.jpg}" alt="user-image" height="42"
+                    <img th:src="@{/images/users/avatar-1.jpg}" alt="user-image" height="42"
                          class="rounded-circle shadow-sm">
                     <span class="leftbar-user-name">Dominic Keller</span>
                 </a>
