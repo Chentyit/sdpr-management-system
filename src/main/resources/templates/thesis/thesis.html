@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head lang="en" th:replace="overview/public :: #public_thesis_head">
+</head>
+
+<body>
+
+<!-- Topbar Start -->
+<div class="navbar-custom topnav-navbar" th:replace="overview/public :: #public_topbar">
+</div>
+<!-- end Topbar -->
+
+
+<div class="container-fluid">
+
+    <!-- Begin page -->
+    <div class="wrapper">
+
+        <!-- ============================================================== -->
+        <!-- Start Page Content here -->
+        <!-- ============================================================== -->
+
+        <!-- Start Content-->
+
+        <!-- ========== Left Sidebar Start ========== -->
+        <div class="left-side-menu" th:replace="overview/public :: #public_left">
+        </div>
+        <!-- Left Sidebar End -->
+
+        <div class="content-page">
+            <div class="content">
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+
+                                <table id="selection-datatable" class="table table-striped dt-responsive nowrap thesis-table-custom"
+                                       width="100%">
+                                    <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>标题</th>
+                                        <th>作者</th>
+                                        <th>来源</th>
+                                        <th>会议名称</th>
+                                        <th>期刊种类</th>
+                                        <th>期刊期号</th>
+                                        <th>发布时间</th>
+                                        <th>Action</th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody>
+                                    <tr th:each="thesis : ${thesisList}">
+                                        <td th:text="${thesis.thesisId}">ID</td>
+                                        <td>
+                                            <a href="#" class="text-body" th:text="${thesis.thesisTitle}">Biblio Plastic Armchair</a>
+                                        </td>
+                                        <td th:text="${thesis.thesisAuthor}">作者</td>
+                                        <td th:switch="${thesis.thesisClassic}">
+                                            <span th:case="0">会议</span>
+                                            <span th:case="0">期刊</span>
+                                            <span th:case="0">其他</span>
+                                        </td>
+                                        <td th:text="${thesis.thesisBooktitle}">会议名称</td>
+                                        <td th:text="${thesis.thesisJournal}">期刊种类</td>
+                                        <td th:text="${thesis.thesisNumber}">期刊期号</td>
+                                        <td th:text="${thesis.thesisYear}">发布时间</td>
+                                        <td class="table-action">
+                                            <a href="javascript:void(0);" class="action-icon">
+                                                <i class="mdi mdi-delete"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+
+                                <br>
+
+                                <div class="row">
+                                    <div class="col-7">
+                                        <a href="#" class="btn btn-success mb-2">Add Thesis</a>
+                                        <button class="btn btn-danger mb-2 thesis-delete-custom">Delete Thesises</button>
+                                    </div>
+                                    <div class="col-5">
+                                        <a href="#" class="btn btn-info mb-2">Upload Thesises</a>
+                                        <a href="#" class="btn btn-info mb-2">Download Thesises</a>
+                                    </div>
+                                </div>
+                            </div> <!-- end card body-->
+                        </div> <!-- end card -->
+                    </div><!-- end col-->
+                </div>
+                <!-- end row-->
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="header-title m-t-0">Dropzone File Upload</h4>
+                                <p class="text-muted font-13 m-b-30">
+                                    DropzoneJS is an open source library that provides drag’n’drop file uploads with
+                                    image previews.
+                                </p>
+
+                                <form action="/" method="post" class="dropzone" id="myAwesomeDropzone"
+                                      data-plugin="dropzone" data-previews-container="#file-previews"
+                                      data-upload-preview-template="#uploadPreviewTemplate">
+                                    <div class="fallback">
+                                        <input name="file" type="file" multiple/>
+                                    </div>
+
+                                    <div class="dz-message needsclick">
+                                        <i class="h1 text-muted dripicons-cloud-upload"></i>
+                                        <h3>Drop files here or click to upload.</h3>
+                                        <span class="text-muted font-13">(This is just a demo dropzone. Selected files are
+                                                    <strong>not</strong> actually uploaded.)</span>
+                                    </div>
+                                </form>
+
+                                <!-- Preview -->
+                                <div class="dropzone-previews mt-3" id="file-previews"></div>
+                            </div>
+                            <!-- end card-body -->
+                        </div>
+                        <!-- end card-->
+                    </div>
+                    <!-- end col-->
+                </div>
+                <!-- end row -->
+            </div> <!-- content -->
+
+            <!-- Footer Start -->
+            <footer class="footer" th:replace="overview/public :: #public_footer">
+            </footer>
+            <!-- end Footer -->
+        </div> <!-- content-page -->
+
+    </div>
+</div>
+<!-- END Container -->
+
+<!-- file preview template -->
+<div class="d-none" id="uploadPreviewTemplate">
+    <div class="card mt-1 mb-0 shadow-none border">
+        <div class="p-2">
+            <div class="row align-items-center">
+                <div class="col-auto">
+                    <img data-dz-thumbnail class="avatar-sm rounded bg-light" alt="">
+                </div>
+                <div class="col pl-0">
+                    <a href="javascript:void(0);" class="text-muted font-weight-bold" data-dz-name></a>
+                    <p class="mb-0" data-dz-size></p>
+                </div>
+                <div class="col-auto">
+                    <!-- Button -->
+                    <a href="" class="btn btn-link btn-lg text-muted" data-dz-remove>
+                        <i class="dripicons-cross"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- App js -->
+<script th:src="@{js/app.min.js}"></script>
+
+<!-- third party js -->
+<script th:src="@{js/vendor/jquery.dataTables.min.js}"></script>
+<script th:src="@{js/vendor/dataTables.bootstrap4.js}"></script>
+<script th:src="@{js/vendor/dataTables.responsive.min.js}"></script>
+<script th:src="@{js/vendor/responsive.bootstrap4.min.js}"></script>
+<script th:src="@{js/vendor/dataTables.buttons.min.js}"></script>
+<script th:src="@{js/vendor/buttons.bootstrap4.min.js}"></script>
+<script th:src="@{js/vendor/buttons.html5.min.js}"></script>
+<script th:src="@{js/vendor/buttons.flash.min.js}"></script>
+<script th:src="@{js/vendor/buttons.print.min.js}"></script>
+<script th:src="@{js/vendor/dataTables.keyTable.min.js}"></script>
+<script th:src="@{js/vendor/dataTables.select.min.js}"></script>
+<script th:src="@{js/vendor/dropzone.min.js}"></script>
+<!-- third party js ends -->
+
+<!-- File upload js -->
+<script th:src="@{js/ui/component.fileupload.js}"></script>
+<!-- end File upload js -->
+
+<!-- demo app -->
+<script th:src="@{js/pages/demo.datatable-init.js}"></script>
+<!-- end demo js-->
+
+<script th:src="@{js/management/thesis.js}"></script>
+
+</body>
+
+</html>
