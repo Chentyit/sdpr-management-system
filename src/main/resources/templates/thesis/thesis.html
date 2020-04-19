@@ -86,7 +86,7 @@
                                         </button>
                                     </div>
                                     <div class="col-5">
-                                        <a href="#" class="btn btn-info mb-2">Upload Thesises</a>
+                                        <button class="btn btn-info mb-2 thesis-upload-custom">Upload Thesises</button>
                                         <a th:href="@{/thesis/download/} + 'thesis.json'" class="btn btn-info mb-2 thesis-download-custom">Download Thesises</a>
                                     </div>
                                 </div>
@@ -100,24 +100,17 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="header-title m-t-0">Dropzone File Upload</h4>
-                                <p class="text-muted font-13 m-b-30">
-                                    DropzoneJS is an open source library that provides drag’n’drop file uploads with
-                                    image previews.
-                                </p>
-
-                                <form action="/" method="post" class="dropzone" id="myAwesomeDropzone"
-                                      data-plugin="dropzone" data-previews-container="#file-previews"
-                                      data-upload-preview-template="#uploadPreviewTemplate">
+                                <form action="#" class="dropzone-custom">
                                     <div class="fallback">
-                                        <input name="file" type="file" multiple/>
+                                        <input name="multipartFile" type="file" />
                                     </div>
 
                                     <div class="dz-message needsclick">
                                         <i class="h1 text-muted dripicons-cloud-upload"></i>
                                         <h3>Drop files here or click to upload.</h3>
-                                        <span class="text-muted font-13">(This is just a demo dropzone. Selected files are
-                                                    <strong>not</strong> actually uploaded.)</span>
+                                        <span class="text-muted font-13">(This is just a demo dropzone. Selected
+                                                files are
+                                                <strong>not</strong> actually uploaded.)</span>
                                     </div>
                                 </form>
 
@@ -132,34 +125,31 @@
                 </div>
                 <!-- end row -->
 
-                <div class="col-md-6">
-                    <div class="card">
-                        <div class="card-body">
-
-                            <!-- Danger Filled Modal -->
-                            <div id="fill-danger-modal" class="modal fade" tabindex="-1" role="dialog"
-                                 aria-labelledby="fill-danger-modalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content modal-filled bg-danger">
-                                        <div class="modal-header">
-                                            <h4 class="modal-title" id="fill-danger-modalLabel">删除该条目</h4>
-                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                                                ×
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <p></p>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-light" data-dismiss="modal">关闭</button>
-                                            <button type="button" class="btn btn-outline-light thesis-delete-one-custom">确认</button>
-                                        </div>
-                                    </div><!-- /.modal-content -->
-                                </div><!-- /.modal-dialog -->
-                            </div><!-- /.modal -->
-                        </div> <!-- end card-body-->
-                    </div> <!-- end card-->
-                </div> <!-- end col-->
+                <div class="card">
+                    <div class="card-body">
+                        <!-- Danger Filled Modal -->
+                        <div id="fill-danger-modal" class="modal fade" tabindex="-1" role="dialog"
+                             aria-labelledby="fill-danger-modalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content modal-filled bg-danger">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title" id="fill-danger-modalLabel">删除该条目</h4>
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                            ×
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p></p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-light" data-dismiss="modal">关闭</button>
+                                        <button type="button" class="btn btn-outline-light thesis-delete-one-custom">确认</button>
+                                    </div>
+                                </div><!-- /.modal-content -->
+                            </div><!-- /.modal-dialog -->
+                        </div><!-- /.modal -->
+                    </div> <!-- end card-body-->
+                </div> <!-- end card-->
             </div> <!-- content -->
 
             <!-- Footer Start -->
@@ -210,7 +200,6 @@
 <script th:src="@{/js/vendor/buttons.print.min.js}"></script>
 <script th:src="@{/js/vendor/dataTables.keyTable.min.js}"></script>
 <script th:src="@{/js/vendor/dataTables.select.min.js}"></script>
-<script th:src="@{/js/vendor/dropzone.min.js}"></script>
 <!-- third party js ends -->
 
 <!-- File upload js -->

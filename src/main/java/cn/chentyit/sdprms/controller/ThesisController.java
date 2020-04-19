@@ -12,13 +12,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.activation.MimetypesFileTypeMap;
-import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
-import java.io.*;
-import java.nio.charset.StandardCharsets;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -103,10 +101,18 @@ public class ThesisController {
     }
 
     @GetMapping("/thesis/download/{fileName}")
-    public void downloadFile(HttpServletResponse response, @PathVariable("fileName") String fileName) throws IOException {
+    public void downloadFile(
+            HttpServletResponse response,
+            @PathVariable("fileName") String fileName) throws IOException {
         List<Thesis> allThesis = thesisService.getAllThesis();
         String thesisJson = new Gson().toJson(allThesis);
 
         ResultPackTools.downloadJsonFile(response, fileName, thesisJson);
+    }
+
+    @PostMapping("/thesis/upload")
+    public String uploadFile(@RequestParam("multipartFile") MultipartFile multipartFile) {
+        log.info("multipartFiles ===== " + multipartFile);
+        return "redirect:/thesis";
     }
 }
