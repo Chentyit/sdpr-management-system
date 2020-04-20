@@ -28,7 +28,7 @@ public class Thesis implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "thesis_id", type = IdType.AUTO)
-    private int thesisId;
+    private String thesisId;
 
     @TableField(value = "thesis_title")
     private String thesisTitle;

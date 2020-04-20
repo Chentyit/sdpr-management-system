@@ -46,7 +46,7 @@ public class ThesisController {
 
     @PostMapping("/thesis/delete")
     @ResponseBody
-    public String deleteByIds(@RequestBody List<Integer> ids) {
+    public String deleteByIds(@RequestBody List<String> ids) {
         log.info("删除论文信息 ID：" + ids);
         int rows = thesisService.deleteThesisById(ids);
         if (rows != 0) {
@@ -57,7 +57,7 @@ public class ThesisController {
     }
 
     @GetMapping("/thesis-details/{thesisId}")
-    public ModelAndView thesisDetails(@PathVariable("thesisId") int thesisId) {
+    public ModelAndView thesisDetails(@PathVariable("thesisId") String thesisId) {
         ModelAndView modelAndView = new ModelAndView();
         Thesis thesis = thesisService.findThesisById(thesisId);
         // 判断是否数据库中是否有该记录

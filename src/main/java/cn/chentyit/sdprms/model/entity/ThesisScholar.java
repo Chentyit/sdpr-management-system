@@ -25,7 +25,7 @@ public class ThesisScholar implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableField(value = "thesis_id")
-    private int thesisId;
+    private String thesisId;
 
     @TableField(value = "scholar_id")
     private int scholarId;

@@ -21,7 +21,7 @@ public class ThesisDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private int thesisId;
+    private String thesisId;
 
     private String thesisTitle;
 

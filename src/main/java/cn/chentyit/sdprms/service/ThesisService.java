@@ -25,7 +25,7 @@ public interface ThesisService {
      * @param ids 需要删除的论文信息 Id
      * @return
      */
-    int deleteThesisById(List<Integer> ids);
+    int deleteThesisById(List<String> ids);
 
     /**
      * 根据 Id 查询论文信息
@@ -33,7 +33,7 @@ public interface ThesisService {
      * @param thesisId 论文 Id
      * @return
      */
-    Thesis findThesisById(int thesisId);
+    Thesis findThesisById(String thesisId);
 
     /**
      * 修改或插入数据

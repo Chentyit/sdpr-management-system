@@ -31,12 +31,12 @@ public class ThesisServiceImpl implements ThesisService {
     }
 
     @Override
-    public int deleteThesisById(List<Integer> ids) {
+    public int deleteThesisById(List<String> ids) {
         return thesisMapper.deleteBatchIds(ids);
     }
 
     @Override
-    public Thesis findThesisById(int thesisId) {
+    public Thesis findThesisById(String thesisId) {
         return thesisMapper.selectById(thesisId);
     }
 
