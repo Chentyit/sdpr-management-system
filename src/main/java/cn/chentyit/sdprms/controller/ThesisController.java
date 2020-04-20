@@ -1,12 +1,18 @@
 package cn.chentyit.sdprms.controller;
 
 import cn.chentyit.sdprms.model.dto.ThesisDTO;
+import cn.chentyit.sdprms.model.entity.Scholar;
 import cn.chentyit.sdprms.model.entity.Thesis;
+import cn.chentyit.sdprms.model.entity.ThesisScholar;
 import cn.chentyit.sdprms.model.vo.ThesisVo;
+import cn.chentyit.sdprms.service.ScholarService;
 import cn.chentyit.sdprms.service.ThemeService;
+import cn.chentyit.sdprms.service.ThesisScholarService;
 import cn.chentyit.sdprms.service.ThesisService;
 import cn.chentyit.sdprms.util.FileUtils;
 import cn.chentyit.sdprms.util.ResultPackUtils;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.google.gson.Gson;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,7 +25,10 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.Collection;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * @Author Chentyit
@@ -33,6 +42,8 @@ public class ThesisController {
 
     private final ThesisService thesisService;
     private final ThemeService themeService;
+    private final ScholarService scholarService;
+    private final ThesisScholarService thesisScholarService;
 
     @GetMapping("/thesis")
     public ModelAndView thesisPage() {
@@ -45,12 +56,11 @@ public class ThesisController {
         return modelAndView;
     }
 
-    @PostMapping("/thesis/delete")
     @ResponseBody
+    @PostMapping("/thesis/delete")
     public String deleteByIds(@RequestBody List<String> ids) {
         log.info("删除论文信息 ID：" + ids);
         System.out.println(ids);
-//        int rows = thesisService.deleteThesisById(ids);
         if (thesisService.removeByIds(ids)) {
             return "redirect:/thesis";
         } else {
@@ -133,14 +143,47 @@ public class ThesisController {
 
     @PostMapping("/thesis/upload")
     public String uploadFile(@RequestParam("multipartFile") MultipartFile multipartFile) {
-        log.info("multipartFiles ===== " + multipartFile.getOriginalFilename());
+        log.info("获取到上传文件 ===== " + multipartFile.getOriginalFilename());
         try {
-            List<Thesis> thesisList = FileUtils.resolveMulFileToBibObj(multipartFile);
-            if (thesisService.saveBatch(thesisList)) {
-                log.info("数据插入成功");
+            // 保存论文信息
+            Map<String, Object> result = FileUtils.resolveMulFileToBibObj(multipartFile);
+            if (thesisService.saveBatch((List<Thesis>) result.get("thesisArrayList"), 100)) {
+                log.info("论文数据插入成功");
             } else {
-                log.error("数据插入失败");
+                log.error("论文数据插入失败");
             }
+
+            // 保存学者信息以及学者和论文信息关联数据
+            Map<String, List<Scholar>> scholarOfThesis = (Map<String, List<Scholar>>) result.get("scholarOfThesis");
+            Set<Map.Entry<String, List<Scholar>>> entries = scholarOfThesis.entrySet();
+            // 获取 thesisId 和 Scholar 数据
+            entries.forEach(entry -> {
+                String thesisId = entry.getKey();
+                List<Scholar> scholarList = entry.getValue();
+                scholarList.forEach(scholar -> {
+                    LambdaUpdateWrapper<Scholar> scholarWrapper = new LambdaUpdateWrapper<>();
+                    scholarWrapper.eq(Scholar::getScholarName, scholar.getScholarName());
+
+                    // 只有学者数据插入成功，才能开始添加关联表
+                    if (scholarService.saveOrUpdate(scholar, scholarWrapper)) {
+                        log.info("学者信息插入成功");
+
+                        ThesisScholar thesisScholar = ThesisScholar.builder()
+                                .thesisId(thesisId)
+                                .scholarId(scholarService.getOne(scholarWrapper).getScholarId())
+                                .build();
+
+                        // 添加关联数据
+                        if (thesisScholarService.save(thesisScholar)) {
+                            log.info("关联数据插入成功");
+                        } else {
+                            log.error("关联数据插入失败");
+                        }
+                    } else {
+                        log.error("学者信息已存在，插入失败");
+                    }
+                });
+            });
         } catch (IOException e) {
             e.printStackTrace();
         }

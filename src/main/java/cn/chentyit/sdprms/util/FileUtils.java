@@ -1,6 +1,8 @@
 package cn.chentyit.sdprms.util;
 
+import cn.chentyit.sdprms.model.entity.Scholar;
 import cn.chentyit.sdprms.model.entity.Thesis;
+import cn.chentyit.sdprms.model.entity.ThesisScholar;
 import cn.chentyit.sdprms.model.pojo.BibTexJsonObj;
 import cn.chentyit.sdprms.model.pojo.Journal;
 import com.alibaba.druid.util.StringUtils;
@@ -18,9 +20,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * @Author Chentyit
@@ -36,7 +36,7 @@ public class FileUtils {
      * @param multipartFile
      * @throws IOException
      */
-    public static List<Thesis> resolveMulFileToBibObj(MultipartFile multipartFile) throws IOException {
+    public static Map<String, Object> resolveMulFileToBibObj(MultipartFile multipartFile) throws IOException {
         // 使用字符流包装字节流
         BufferedReader br = new BufferedReader(
                 new InputStreamReader(
@@ -56,8 +56,8 @@ public class FileUtils {
         JsonElement records = asJsonObject.get("records");
         Gson gson = new Gson();
 
-        // 将列表里面的数据转化为数据库映射 entity 对象
-        return bibObjToThesis(gson.fromJson(records.toString(), new TypeToken<List<BibTexJsonObj>>() {
+        // 将列表里面的数据转化为数据库映射 Thesis 对象
+        return bibObjToEntity(gson.fromJson(records.toString(), new TypeToken<List<BibTexJsonObj>>() {
         }.getType()));
     }
 
@@ -120,10 +120,17 @@ public class FileUtils {
      *
      * @param bibTexJsonObjs
      */
-    private static List<Thesis> bibObjToThesis(List<BibTexJsonObj> bibTexJsonObjs) {
+    private static Map<String, Object> bibObjToEntity(List<BibTexJsonObj> bibTexJsonObjs) {
         List<Thesis> thesisArrayList = new ArrayList<>();
+        Map<String, List<Scholar>> scholarOfThesis = new HashMap<>(16);
+
+        // 存储数据集合
+        Map<String, Object> result = new HashMap<>(2);
+
         bibTexJsonObjs.forEach(bibTexJsonObj -> {
             Thesis thesis = Thesis.builder().build();
+            // 用于保存该论文信息对应的学者数据
+            List<Scholar> scholars = new ArrayList<>();
 
             thesis.setThesisId(bibTexJsonObj.getId());
             thesis.setThesisTitle(bibTexJsonObj.getTitle());
@@ -132,8 +139,20 @@ public class FileUtils {
             // 保存作者信息
             StringBuilder sb = new StringBuilder();
             bibTexJsonObj.getAuthor().forEach(author -> {
-                sb.append(author.getName()).append(" and ");
+                // 获取学者名字
+                String name = author.getName();
+
+                sb.append(name).append(" and ");
+
+                // 保存学者信息
+                Scholar scholar = Scholar.builder()
+                        .scholarName(name.replace(",", ""))
+                        .scholarLastName(name.split(",")[1].trim())
+                        .build();
+                scholars.add(scholar);
             });
+
+            scholarOfThesis.put(bibTexJsonObj.getId(), scholars);
             String authors = sb.toString();
             thesis.setThesisAuthor(authors.substring(0, authors.length() - 5));
 
@@ -186,6 +205,9 @@ public class FileUtils {
             thesisArrayList.add(thesis);
         });
 
-        return thesisArrayList;
+        result.put("thesisArrayList", thesisArrayList);
+        result.put("scholarOfThesis", scholarOfThesis);
+
+        return result;
     }
 }
