@@ -10,7 +10,7 @@ import cn.chentyit.sdprms.model.entity.Thesis;
 import cn.chentyit.sdprms.model.pojo.NumberOfPublication;
 import cn.chentyit.sdprms.model.vo.DofVo;
 import cn.chentyit.sdprms.service.OverviewService;
-import cn.chentyit.sdprms.util.ResultPackTools;
+import cn.chentyit.sdprms.util.ResultPackUtils;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import org.springframework.stereotype.Service;
 
@@ -80,11 +80,11 @@ public class OverviewServiceImpl implements OverviewService {
         for (NumberOfPublication data: nopData) {
             result.get(data.getThemeName()).put(data.getThesisYear(), data.getNum());
         }
-        return ResultPackTools.packDataMapToDataList(result);
+        return ResultPackUtils.packDataMapToDataList(result);
     }
 
     @Override
     public List<DofVo> getDofData() {
-        return ResultPackTools.packDofList(statisticsMapper.getDistributionOfField());
+        return ResultPackUtils.packDofList(statisticsMapper.getDistributionOfField());
     }
 }

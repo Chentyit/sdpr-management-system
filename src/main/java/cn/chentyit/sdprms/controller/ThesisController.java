@@ -5,7 +5,8 @@ import cn.chentyit.sdprms.model.entity.Thesis;
 import cn.chentyit.sdprms.model.vo.ThesisVo;
 import cn.chentyit.sdprms.service.ThemeService;
 import cn.chentyit.sdprms.service.ThesisService;
-import cn.chentyit.sdprms.util.ResultPackTools;
+import cn.chentyit.sdprms.util.FileUtils;
+import cn.chentyit.sdprms.util.ResultPackUtils;
 import com.google.gson.Gson;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -107,12 +108,17 @@ public class ThesisController {
         List<Thesis> allThesis = thesisService.getAllThesis();
         String thesisJson = new Gson().toJson(allThesis);
 
-        ResultPackTools.downloadJsonFile(response, fileName, thesisJson);
+        ResultPackUtils.downloadJsonFile(response, fileName, thesisJson);
     }
 
     @PostMapping("/thesis/upload")
     public String uploadFile(@RequestParam("multipartFile") MultipartFile multipartFile) {
-        log.info("multipartFiles ===== " + multipartFile);
+        log.info("multipartFiles ===== " + multipartFile.getOriginalFilename());
+        try {
+            FileUtils.resolveMulFile(multipartFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return "redirect:/thesis";
     }
 }

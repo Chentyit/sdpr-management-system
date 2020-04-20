@@ -21,7 +21,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @Date 2020/4/15 17:52
  * @Description:
  */
-public class ResultPackTools {
+public class ResultPackUtils {
 
     /**
      * {

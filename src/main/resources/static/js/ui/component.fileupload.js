@@ -1,4 +1,4 @@
-new Dropzone(".dropzone-custom", {
+new Dropzone(".dropzone", {
     url: "/thesis/upload",
     method: "post",
     paramName: "multipartFile",
@@ -8,7 +8,7 @@ new Dropzone(".dropzone-custom", {
     addRemoveLinks: true,
     parallelUploads: 1,     //一次上传的文件数量
     dictDefaultMessage: '拖动文件至此或者点击上传',
-    dictMaxFilesExceeded: "您最多只能上传8个文件！",
+    dictMaxFilesExceeded: "您最多只能上传1个文件！",
     dictResponseError: '文件上传失败!',
     dictInvalidFileType: "文件类型只能是*.json",
     dictFallbackMessage: "浏览器不受支持",
