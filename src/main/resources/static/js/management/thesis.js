@@ -11,7 +11,7 @@ $(function () {
     $(document).on("click", ".thesis-delete-one-custom", function () {
         let item = $(".modal-body p").text()
 
-        let ids = [parseInt(item.split("||")[1].split("-")[1])]
+        let ids = [item.split("||")[1].split("-")[1]]
 
         deleteByIds(ids)
     })
@@ -24,9 +24,8 @@ $(function () {
         // 获取 Id 集合
         let ids = []
         for (let i = 0; i < l.length; i++) {
-            ids.push(parseInt(l[i].cells.item(0).innerText));
+            ids.push(l[i].cells.item(0).innerText);
         }
-
         deleteByIds(ids)
     })
 

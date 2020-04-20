@@ -2,6 +2,7 @@ package cn.chentyit.sdprms.service;
 
 import cn.chentyit.sdprms.model.dto.ThesisDTO;
 import cn.chentyit.sdprms.model.entity.Thesis;
+import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;
 
@@ -10,7 +11,7 @@ import java.util.List;
  * @Date 2020/4/16 15:30
  * @Description: 管理系统服务层
  */
-public interface ThesisService {
+public interface ThesisService extends IService<Thesis> {
 
     /**
      * 获取所有论文数据信息
@@ -26,20 +27,4 @@ public interface ThesisService {
      * @return
      */
     int deleteThesisById(List<String> ids);
-
-    /**
-     * 根据 Id 查询论文信息
-     *
-     * @param thesisId 论文 Id
-     * @return
-     */
-    Thesis findThesisById(String thesisId);
-
-    /**
-     * 修改或插入数据
-     *
-     * @param thesisDTO
-     * @return
-     */
-    int saveOrUpdateThesis(ThesisDTO thesisDTO);
 }

@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -48,8 +49,9 @@ public class ThesisController {
     @ResponseBody
     public String deleteByIds(@RequestBody List<String> ids) {
         log.info("删除论文信息 ID：" + ids);
-        int rows = thesisService.deleteThesisById(ids);
-        if (rows != 0) {
+        System.out.println(ids);
+//        int rows = thesisService.deleteThesisById(ids);
+        if (thesisService.removeByIds(ids)) {
             return "redirect:/thesis";
         } else {
             return "删除失败";
@@ -59,7 +61,7 @@ public class ThesisController {
     @GetMapping("/thesis-details/{thesisId}")
     public ModelAndView thesisDetails(@PathVariable("thesisId") String thesisId) {
         ModelAndView modelAndView = new ModelAndView();
-        Thesis thesis = thesisService.findThesisById(thesisId);
+        Thesis thesis = thesisService.getById(thesisId);
         // 判断是否数据库中是否有该记录
         if (thesis != null) {
             // 将数据库映射对象转化为 Vo 视图对象
@@ -93,8 +95,26 @@ public class ThesisController {
 
     @PostMapping("/thesis-detail")
     public String updateOrInsertThesis(ThesisDTO thesisDTO) {
-        int rows = thesisService.saveOrUpdateThesis(thesisDTO);
-        if (rows != 0) {
+        Thesis thesis = Thesis.builder()
+                .thesisId(thesisDTO.getThesisId())
+                .thesisTitle(thesisDTO.getThesisTitle())
+                .themeId(thesisDTO.getThemeId())
+                .thesisAuthor(thesisDTO.getThesisAuthor())
+                .thesisDigest(thesisDTO.getThesisDigest())
+                .thesisClassic(thesisDTO.getThesisClassic())
+                .thesisBooktitle(thesisDTO.getThesisBooktitle())
+                .thesisOrganization(thesisDTO.getThesisOrganization())
+                .thesisPublisher(thesisDTO.getThesisPublisher())
+                .thesisJournal(thesisDTO.getThesisJournal())
+                .thesisVolume(thesisDTO.getThesisVolume())
+                .thesisNumber(thesisDTO.getThesisNumber())
+                .thesisPages(thesisDTO.getThesisPages())
+                .thesisYear(thesisDTO.getThesisYear())
+                .thesisDoi(thesisDTO.getThesisDoi())
+                .thesisBibtex(thesisDTO.getThesisBibtex())
+                .thesisUpdateTime(LocalDateTime.now())
+                .build();
+        if (thesisService.saveOrUpdate(thesis)) {
             return "redirect:/thesis";
         } else {
             return "修改或添加失败";
@@ -115,7 +135,8 @@ public class ThesisController {
     public String uploadFile(@RequestParam("multipartFile") MultipartFile multipartFile) {
         log.info("multipartFiles ===== " + multipartFile.getOriginalFilename());
         try {
-            FileUtils.resolveMulFile(multipartFile);
+            List<Thesis> thesisList = FileUtils.resolveMulFileToBibObj(multipartFile);
+            thesisService.saveBatch(thesisList);
         } catch (IOException e) {
             e.printStackTrace();
         }

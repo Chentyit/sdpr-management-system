@@ -23,6 +23,7 @@ new Dropzone(".dropzone", {
         this.on("success", function (file, data) {
             //上传成功触发的事件
             console.log("success")
+            console.log(data)
         });
         this.on("error", function (file, data) {
             //上传失败触发的事件

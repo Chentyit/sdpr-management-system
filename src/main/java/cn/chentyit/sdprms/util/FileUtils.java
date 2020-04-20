@@ -35,7 +35,7 @@ public class FileUtils {
      * @param multipartFile
      * @throws IOException
      */
-    public static void resolveMulFile(MultipartFile multipartFile) throws IOException {
+    public static List<Thesis> resolveMulFileToBibObj(MultipartFile multipartFile) throws IOException {
         // 使用字符流包装字节流
         BufferedReader br = new BufferedReader(
                 new InputStreamReader(
@@ -56,7 +56,7 @@ public class FileUtils {
         Gson gson = new Gson();
 
         // 将列表里面的数据转化为数据库映射 entity 对象
-        List<Thesis> thesisList = bibObjToThesis(gson.fromJson(records.toString(), new TypeToken<List<BibTexJsonObj>>() {
+        return bibObjToThesis(gson.fromJson(records.toString(), new TypeToken<List<BibTexJsonObj>>() {
         }.getType()));
     }
 

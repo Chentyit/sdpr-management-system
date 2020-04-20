@@ -78,6 +78,10 @@
                                     </div>
                                     <div class="form-group mb-3">
                                         <label for="validationCustom06">论文来源种类</label>
+                                        <select id="validationCustom06" class="form-control custom-select"
+                                                name="thesisClassic" required>
+                                            <option th:selected="*{thesisClassic eq 0}" th:value="0"></option>
+                                        </select>
                                         <input type="text" class="form-control" id="validationCustom06"
                                                placeholder="论文来源种类" th:value="*{thesisClassic}" name="thesisClassic"
                                                required>

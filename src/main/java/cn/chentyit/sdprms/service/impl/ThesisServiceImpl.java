@@ -6,6 +6,7 @@ import cn.chentyit.sdprms.model.entity.Thesis;
 import cn.chentyit.sdprms.model.vo.ThesisVo;
 import cn.chentyit.sdprms.service.ThesisService;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,7 @@ import java.util.List;
  * @Description:
  */
 @Service
-public class ThesisServiceImpl implements ThesisService {
+public class ThesisServiceImpl extends ServiceImpl<ThesisMapper, Thesis> implements ThesisService {
 
     @Resource
     private ThesisMapper thesisMapper;
@@ -33,39 +34,5 @@ public class ThesisServiceImpl implements ThesisService {
     @Override
     public int deleteThesisById(List<String> ids) {
         return thesisMapper.deleteBatchIds(ids);
-    }
-
-    @Override
-    public Thesis findThesisById(String thesisId) {
-        return thesisMapper.selectById(thesisId);
-    }
-
-    @Override
-    public int saveOrUpdateThesis(ThesisDTO thesisDTO) {
-        Thesis thesisBuf = Thesis.builder()
-                .thesisId(thesisDTO.getThesisId())
-                .thesisTitle(thesisDTO.getThesisTitle())
-                .themeId(thesisDTO.getThemeId())
-                .thesisAuthor(thesisDTO.getThesisAuthor())
-                .thesisDigest(thesisDTO.getThesisDigest())
-                .thesisClassic(thesisDTO.getThesisClassic())
-                .thesisBooktitle(thesisDTO.getThesisBooktitle())
-                .thesisOrganization(thesisDTO.getThesisOrganization())
-                .thesisPublisher(thesisDTO.getThesisPublisher())
-                .thesisJournal(thesisDTO.getThesisJournal())
-                .thesisVolume(thesisDTO.getThesisVolume())
-                .thesisNumber(thesisDTO.getThesisNumber())
-                .thesisPages(thesisDTO.getThesisPages())
-                .thesisYear(thesisDTO.getThesisYear())
-                .thesisDoi(thesisDTO.getThesisDoi())
-                .thesisBibtex(thesisDTO.getThesisBibtex())
-                .thesisUpdateTime(LocalDateTime.now())
-                .build();
-        if (thesisMapper.selectById(thesisDTO.getThesisId()) != null) {
-            return thesisMapper.updateById(thesisBuf);
-        } else {
-            thesisBuf.setThesisCreateTime(LocalDateTime.now());
-            return thesisMapper.insert(thesisBuf);
-        }
     }
 }
