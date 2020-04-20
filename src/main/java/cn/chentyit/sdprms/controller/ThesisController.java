@@ -136,7 +136,11 @@ public class ThesisController {
         log.info("multipartFiles ===== " + multipartFile.getOriginalFilename());
         try {
             List<Thesis> thesisList = FileUtils.resolveMulFileToBibObj(multipartFile);
-            thesisService.saveBatch(thesisList);
+            if (thesisService.saveBatch(thesisList)) {
+                log.info("数据插入成功");
+            } else {
+                log.error("数据插入失败");
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }

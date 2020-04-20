@@ -43,7 +43,7 @@ public class ThesisVo implements Serializable {
 
     private int thesisVolume;
 
-    private int thesisNumber;
+    private String thesisNumber;
 
     private String thesisPages;
 

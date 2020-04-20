@@ -3,6 +3,7 @@ package cn.chentyit.sdprms.util;
 import cn.chentyit.sdprms.model.entity.Thesis;
 import cn.chentyit.sdprms.model.pojo.BibTexJsonObj;
 import cn.chentyit.sdprms.model.pojo.Journal;
+import com.alibaba.druid.util.StringUtils;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -152,20 +153,24 @@ public class FileUtils {
 
             // 设置期刊名称
             Journal journal = bibTexJsonObj.getJournal();
-            if (Objects.isNull(journal)) {
+            if (!Objects.isNull(journal)) {
                 thesis.setThesisPublisher(journal.getName());
                 // 设置期刊类别
                 String journal_name = bibTexJsonObj.getJournal().getName();
                 if (journal_name.contains("(") && journal_name.contains(")")) {
                     String journal_classic = journal_name.substring(
-                            journal_name.indexOf("("),
+                            journal_name.indexOf("(") + 1,
                             journal_name.indexOf(")"));
                     thesis.setThesisJournal(journal_classic);
                 }
                 // 设置期刊卷号
-                thesis.setThesisVolume(Integer.parseInt(journal.getVolume()));
+                thesis.setThesisVolume(journal.getVolume() == null ? 0 : Integer.parseInt(journal.getVolume()));
                 // 设置期刊
-                thesis.setThesisNumber(Integer.parseInt(journal.getNumber()));
+                if (journal.getNumber() != null && StringUtils.isNumber(journal.getNumber())) {
+                    thesis.setThesisNumber(journal.getNumber());
+                } else {
+                    thesis.setThesisNumber("");
+                }
                 // 设置论文页码
                 thesis.setThesisPages(journal.getPages());
             } else {

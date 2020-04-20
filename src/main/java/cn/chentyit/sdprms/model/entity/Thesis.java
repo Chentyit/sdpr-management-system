@@ -61,7 +61,7 @@ public class Thesis implements Serializable {
     private int thesisVolume;
 
     @TableField(value = "thesis_number")
-    private int thesisNumber;
+    private String thesisNumber;
 
     @TableField(value = "thesis_pages")
     private String thesisPages;
