@@ -17,17 +17,22 @@ new Dropzone(".dropzone", {
     dictCancelUpload: "取消",
     init: function () {
         this.on("addedfile", function (file) {
-            //上传文件时触发的事件
+            // 上传文件时触发的事件
 
         });
         this.on("success", function (file, data) {
-            //上传成功触发的事件
-            console.log("success")
-            console.log(data)
+            // 上传成功触发的事件
+            if (data['flag']) {
+                console.log("文件上传成功")
+                window.location.href = "/thesis"
+            }
         });
         this.on("error", function (file, data) {
-            //上传失败触发的事件
-            console.log("error")
+            // 上传失败触发的事件
+            if (!data['flag']) {
+                console.log("文件上传失败")
+                window.location.href = "/thesis"
+            }
         });
         this.on("removedfile", function (file) {//删除文件触发结果
             //console.log(file);

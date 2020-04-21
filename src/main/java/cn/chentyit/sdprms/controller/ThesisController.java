@@ -25,10 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * @Author Chentyit
@@ -141,9 +138,12 @@ public class ThesisController {
         ResultPackUtils.downloadJsonFile(response, fileName, thesisJson);
     }
 
+    @ResponseBody
     @PostMapping("/thesis/upload")
-    public String uploadFile(@RequestParam("multipartFile") MultipartFile multipartFile) {
+    public Map<String, Boolean> uploadFile(@RequestParam("multipartFile") MultipartFile multipartFile) {
         log.info("获取到上传文件 ===== " + multipartFile.getOriginalFilename());
+        Map<String, Boolean> res = new HashMap<>();
+
         try {
             // 保存论文信息
             Map<String, Object> result = FileUtils.resolveMulFileToBibObj(multipartFile);
@@ -184,9 +184,11 @@ public class ThesisController {
                     }
                 });
             });
+            res.put("flag", true);
         } catch (IOException e) {
             e.printStackTrace();
+            res.put("flag", false);
         }
-        return "redirect:/thesis";
+        return res;
     }
 }
