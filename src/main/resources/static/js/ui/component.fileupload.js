@@ -11,7 +11,7 @@ new Dropzone(".dropzone", {
     dictMaxFilesExceeded: "您最多只能上传1个文件！",
     dictResponseError: '文件上传失败!',
     dictInvalidFileType: "文件类型只能是*.json",
-    dictFallbackMessage: "浏览器不受支持",
+    dictFallbackMessage: "浏览器不支持",
     dictFileTooBig: "文件过大上传文件最大支持.",
     dictRemoveLinks: "删除",
     dictCancelUpload: "取消",
