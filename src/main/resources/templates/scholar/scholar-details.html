@@ -1,233 +1,112 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-    <head>
-        <meta charset="utf-8" />
-        <title>Hyper - Responsive Bootstrap 4 Admin Dashboard</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
-        <meta content="Coderthemes" name="author" />
-        <!-- App favicon -->
-        <link rel="shortcut icon" href="assets/images/favicon.ico">
+<head lang="en" th:replace="overview/public :: #public_scholar_detail_head">
+</head>
 
-        <!-- App css -->
-        <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
-        <link href="assets/css/app.min.css" rel="stylesheet" type="text/css" />
-    </head>
+<body>
 
-    <body>
+<!-- Topbar Start -->
+<div class="navbar-custom topnav-navbar" th:replace="overview/public :: #public_topbar">
+</div>
+<!-- end Topbar -->
 
-        <!-- Topbar Start -->
-        <div class="navbar-custom topnav-navbar">
-            <div class="container-fluid">
 
-                <!-- LOGO -->
-                <a href="index.html" class="topnav-logo">
-                    <span class="topnav-logo-lg">
-                        <img src="assets/images/logo-light.png" alt="" height="16">
-                    </span>
-                    <span class="topnav-logo-sm">
-                        <img src="assets/images/logo_sm.png" alt="" height="16">
-                    </span>
-                </a>
+<div class="container-fluid">
 
-                <ul class="list-unstyled topbar-right-menu float-right mb-0">
-    
-                    <li class="dropdown notification-list">
-                        <a class="nav-link dropdown-toggle nav-user arrow-none mr-0" data-toggle="dropdown" id="topbar-userdrop" href="#" role="button" aria-haspopup="true"
-                            aria-expanded="false">
-                            <span class="account-user-avatar"> 
-                                <img src="assets/images/users/avatar-1.jpg" alt="user-image" class="rounded-circle">
-                            </span>
-                            <span>
-                                <span class="account-user-name">Dominic Keller</span>
-                                <span class="account-position">Founder</span>
-                            </span>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-animated topbar-dropdown-menu profile-dropdown" aria-labelledby="topbar-userdrop">
-                            <!-- item-->
-                            <div class=" dropdown-header noti-title">
-                                <h6 class="text-overflow m-0">Welcome !</h6>
-                            </div>
-    
-                            <!-- item-->
-                            <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                <i class="mdi mdi-logout mr-1"></i>
-                                <span>Logout</span>
-                            </a>
-    
-                        </div>
-                    </li>
+    <!-- Begin page -->
+    <div class="wrapper">
 
-                </ul>
-                <a class="button-menu-mobile disable-btn">
-                    <div class="lines">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </div>
-                </a>
-            </div>
+        <!-- ============================================================== -->
+        <!-- Start Page Content here -->
+        <!-- ============================================================== -->
+
+        <!-- Start Content-->
+
+        <!-- ========== Left Sidebar Start ========== -->
+        <div class="left-side-menu" th:replace="overview/public :: #public_left">
         </div>
-        <!-- end Topbar -->
+        <!-- Left Sidebar End -->
 
-
-        <div class="container-fluid">
-
-            <!-- Begin page -->
-            <div class="wrapper">
-
-                <!-- ============================================================== -->
-                <!-- Start Page Content here -->
-                <!-- ============================================================== -->
-
-                <!-- Start Content-->
-
-                <!-- ========== Left Sidebar Start ========== -->
-                <div class="left-side-menu">
-
-                    <div class="leftbar-user">
-                        <a href="#">
-                            <img src="assets/images/users/avatar-1.jpg" alt="user-image" height="42" class="rounded-circle shadow-sm">
-                            <span class="leftbar-user-name">Dominic Keller</span>
-                        </a>
-                    </div>
-
-                    <!--- Sidemenu -->
-                    <ul class="metismenu side-nav">
-
-                        <!-- OverView -->
-                        <li class="side-nav-item">
-                            <a href="pages-overview.html" class="side-nav-link">
-                                <span> OverView </span>
-                            </a>
-                        </li>
-
-                        <!-- Thesis -->
-                        <li class="side-nav-item">
-                            <a href="pages-thesis.html" class="side-nav-link">
-                                <span> Thesis </span>
-                            </a>
-                        </li>
-
-                        <!-- Scholar -->
-                        <li class="side-nav-item">
-                            <a href="scholar.html" class="side-nav-link">
-                                <span> Scholar </span>
-                            </a>
-                        </li>
-
-                        <!-- Theme -->
-                        <li class="side-nav-item">
-                            <a href="pages-theme.html" class="side-nav-link">
-                                <span> Theme </span>
-                            </a>
-                        </li>
-                    </ul>
-
-                    <div class="clearfix"></div>
-                    <!-- Sidebar -left -->
-
+        <div class="content-page">
+            <div class="content">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <form th:action="@{/scholar-detail}" class="needs-validation" th:method="post" th:object="${scholarVo}">
+                                    <div class="form-group mb-3">
+                                        <label for="validationCustom01">学者 ID</label>
+                                        <input type="text"
+                                               class="form-control"
+                                               id="validationCustom01"
+                                               placeholder="学者 ID"
+                                               th:value="*{scholarId}"
+                                               name="scholarId"
+                                               required>
+                                        <div class="valid-feedback">
+                                            请填写学者ID
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="validationCustom02">学者姓名（姓名用空格隔开，暂不支持中文）</label>
+                                        <input type="text"
+                                               class="form-control"
+                                               id="validationCustom02"
+                                               placeholder="学者姓名"
+                                               th:value="*{scholarName}"
+                                               name="scholarName"
+                                               required>
+                                        <div class="valid-feedback">
+                                            请填写学者姓名
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="validationCustom03">学者国籍</label>
+                                        <input type="text"
+                                               class="form-control"
+                                               id="validationCustom03"
+                                               placeholder="学者国籍"
+                                               th:value="*{scholarCountry}"
+                                               name="scholarCountry"
+                                               required>
+                                        <div class="valid-feedback">
+                                            请填写学者国籍
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <div class="custom-control custom-checkbox form-check">
+                                            <input type="checkbox"
+                                                   class="custom-control-input"
+                                                   id="invalidCheck"
+                                                   required>
+                                            <label class="custom-control-label" for="invalidCheck">请再次确认是否保存</label>
+                                            <div class="invalid-feedback">
+                                                You must agree before submitting.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-primary" type="submit">保存学者信息</button>
+                                </form>
+                            </div> <!-- end card-body-->
+                        </div> <!-- end card-->
+                    </div> <!-- end col-->
                 </div>
-                <!-- Left Sidebar End -->
+                <!-- end row-->
+            </div> <!-- content -->
 
-                <div class="content-page">
-                    <div class="content">
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <form class="needs-validation" novalidate>
-                                            <div class="form-group mb-3">
-                                                <label for="validationCustom01">First name</label>
-                                                <input type="text" class="form-control" id="validationCustom01" placeholder="First name" value="Mark" required>
-                                                <div class="valid-feedback">
-                                                    Looks good!
-                                                </div>
-                                            </div>
-                                            <div class="form-group mb-3">
-                                                <label for="validationCustom02">Last name</label>
-                                                <input type="text" class="form-control" id="validationCustom02" placeholder="Last name" value="Otto" required>
-                                                <div class="valid-feedback">
-                                                    Looks good!
-                                                </div>
-                                            </div>
-                                            <div class="form-group mb-3">
-                                                <label for="validationCustomUsername">Username</label>
-                                                <div class="input-group">
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text" id="inputGroupPrepend">@</span>
-                                                    </div>
-                                                    <input type="text" class="form-control" id="validationCustomUsername" placeholder="Username" aria-describedby="inputGroupPrepend"
-                                                        required>
-                                                    <div class="invalid-feedback">
-                                                        Please choose a username.
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group mb-3">
-                                                <label for="validationCustom03">City</label>
-                                                <input type="text" class="form-control" id="validationCustom03" placeholder="City" required>
-                                                <div class="invalid-feedback">
-                                                    Please provide a valid city.
-                                                </div>
-                                            </div>
-                                            <div class="form-group mb-3">
-                                                <label for="validationCustom04">State</label>
-                                                <input type="text" class="form-control" id="validationCustom04" placeholder="State" required>
-                                                <div class="invalid-feedback">
-                                                    Please provide a valid state.
-                                                </div>
-                                            </div>
-                                            <div class="form-group mb-3">
-                                                <label for="validationCustom05">Zip</label>
-                                                <input type="text" class="form-control" id="validationCustom05" placeholder="Zip" required>
-                                                <div class="invalid-feedback">
-                                                    Please provide a valid zip.
-                                                </div>
-                                            </div>
-                                            <div class="form-group mb-3">
-                                                <div class="custom-control custom-checkbox form-check">
-                                                    <input type="checkbox" class="custom-control-input" id="invalidCheck" required>
-                                                    <label class="custom-control-label" for="invalidCheck">请再次确认是否保存</label>
-                                                    <div class="invalid-feedback">
-                                                        You must agree before submitting.
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <button class="btn btn-primary" type="submit">Submit form</button>
-                                        </form>
-                                    </div> <!-- end card-body-->
-                                </div> <!-- end card-->
-                            </div> <!-- end col-->
-                        </div>
-                        <!-- end row-->
-                    </div> <!-- content -->
+            <!-- Footer Start -->
+            <footer class="footer" th:replace="overview/public :: #public_footer">
+            </footer>
+            <!-- end Footer -->
+        </div> <!-- content-page -->
 
-                    <!-- Footer Start -->
-                    <footer class="footer">
-                        <div class="row">
-                            <div class="col-md-6">
-                                2018 - 2019 © Hyper - Coderthemes.com
-                            </div>
-                            <div class="col-md-6">
-                                <div class="text-md-right footer-links d-none d-md-block">
-                                    <a href="javascript: void(0);">About</a>
-                                    <a href="javascript: void(0);">Support</a>
-                                    <a href="javascript: void(0);">Contact Us</a>
-                                </div>
-                            </div>
-                        </div>
-                    </footer>
-                    <!-- end Footer -->
-                </div> <!-- content-page -->
+    </div>
+</div>
+<!-- END Container -->
 
-            </div>
-        </div>
-        <!-- END Container -->
-
-        <!-- App js -->
-        <script src="assets/js/app.min.js"></script>
-    </body>
+<!-- App js -->
+<script th:src="@{/js/app.min.js}"></script>
+</body>
 
 </html>

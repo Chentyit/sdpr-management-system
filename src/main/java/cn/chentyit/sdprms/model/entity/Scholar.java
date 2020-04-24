@@ -37,7 +37,4 @@ public class Scholar implements Serializable {
 
     @TableField(value = "scholar_country")
     private String scholarCountry;
-
-    @TableField(value = "institute_id")
-    private String instituteId;
 }

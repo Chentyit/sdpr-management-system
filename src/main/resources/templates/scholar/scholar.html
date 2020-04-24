@@ -1,297 +1,199 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-    <head>
-        <meta charset="utf-8" />
-        <title>Hyper - Responsive Bootstrap 4 Admin Dashboard</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
-        <meta content="Coderthemes" name="author" />
-        <!-- App favicon -->
-        <link rel="shortcut icon" href="assets/images/favicon.ico">
+<head lang="en" th:replace="overview/public :: #public_scholar_head">
+</head>
 
-        <!-- third party css -->
-        <link href="assets/css/vendor/dataTables.bootstrap4.css" rel="stylesheet" type="text/css" />
-        <link href="assets/css/vendor/responsive.bootstrap4.css" rel="stylesheet" type="text/css" />
-        <link href="assets/css/vendor/buttons.bootstrap4.css" rel="stylesheet" type="text/css" />
-        <link href="assets/css/vendor/select.bootstrap4.css" rel="stylesheet" type="text/css" />
-        <!-- third party css end -->
+<body>
 
-        <!-- App css -->
-        <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
-        <link href="assets/css/app.min.css" rel="stylesheet" type="text/css" />
-    </head>
+<!-- Topbar Start -->
+<div class="navbar-custom topnav-navbar" th:replace="overview/public :: #public_topbar">
+</div>
+<!-- end Topbar -->
 
-    <body>
 
-        <!-- Topbar Start -->
-        <div class="navbar-custom topnav-navbar">
-            <div class="container-fluid">
+<div class="container-fluid">
 
-                <!-- LOGO -->
-                <a href="index.html" class="topnav-logo">
-                    <span class="topnav-logo-lg">
-                        <img src="assets/images/logo-light.png" alt="" height="16">
-                    </span>
-                    <span class="topnav-logo-sm">
-                        <img src="assets/images/logo_sm.png" alt="" height="16">
-                    </span>
-                </a>
+    <!-- Begin page -->
+    <div class="wrapper">
 
-                <ul class="list-unstyled topbar-right-menu float-right mb-0">
-    
-                    <li class="dropdown notification-list">
-                        <a class="nav-link dropdown-toggle nav-user arrow-none mr-0" data-toggle="dropdown" id="topbar-userdrop" href="#" role="button" aria-haspopup="true"
-                            aria-expanded="false">
-                            <span class="account-user-avatar"> 
-                                <img src="assets/images/users/avatar-1.jpg" alt="user-image" class="rounded-circle">
-                            </span>
-                            <span>
-                                <span class="account-user-name">Dominic Keller</span>
-                                <span class="account-position">Founder</span>
-                            </span>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-animated topbar-dropdown-menu profile-dropdown" aria-labelledby="topbar-userdrop">
-                            <!-- item-->
-                            <div class=" dropdown-header noti-title">
-                                <h6 class="text-overflow m-0">Welcome !</h6>
-                            </div>
-    
-                            <!-- item-->
-                            <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                <i class="mdi mdi-logout mr-1"></i>
-                                <span>Logout</span>
-                            </a>
-    
-                        </div>
-                    </li>
+        <!-- ============================================================== -->
+        <!-- Start Page Content here -->
+        <!-- ============================================================== -->
 
-                </ul>
-                <a class="button-menu-mobile disable-btn">
-                    <div class="lines">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </div>
-                </a>
-            </div>
+        <!-- Start Content-->
+
+        <!-- ========== Left Sidebar Start ========== -->
+        <div class="left-side-menu" th:replace="overview/public :: #public_left">
         </div>
-        <!-- end Topbar -->
+        <!-- Left Sidebar End -->
 
+        <div class="content-page">
+            <div class="content">
 
-        <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
 
-            <!-- Begin page -->
-            <div class="wrapper">
+                                <table id="selection-datatable" class="table table-striped dt-responsive nowrap" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th>学者Id</th>
+                                            <th>学者全名</th>
+                                            <th>国籍</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
 
-                <!-- ============================================================== -->
-                <!-- Start Page Content here -->
-                <!-- ============================================================== -->
+                                    <tbody>
+                                        <tr th:each="scholar : ${scholarVos}">
+                                            <td th:text="${scholar.scholarId}">学者Id</td>
+                                            <td>
+                                                <a th:href="@{/scholar-detail/} + ${scholar.scholarId}" class="text-body" th:text="${scholar.scholarName}">学者姓名</a>
+                                            </td>
+                                            <td th:text="${scholar.scholarCountry}">国籍</td>
+                                            <td class="table-action">
+                                                <button type="button" class="btn btn-danger scholar-delete-btn-custom" data-toggle="modal"
+                                                        data-target="#fill-danger-modal" th:id="'scholar-' + ${scholar.scholarId}">Delete</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
 
-                <!-- Start Content-->
+                                <br>
 
-                <!-- ========== Left Sidebar Start ========== -->
-                <div class="left-side-menu">
-
-                    <div class="leftbar-user">
-                        <a href="#">
-                            <img src="assets/images/users/avatar-1.jpg" alt="user-image" height="42" class="rounded-circle shadow-sm">
-                            <span class="leftbar-user-name">Dominic Keller</span>
-                        </a>
-                    </div>
-
-                    <!--- Sidemenu -->
-                    <ul class="metismenu side-nav">
-
-                        <!-- OverView -->
-                        <li class="side-nav-item">
-                            <a href="pages-overview.html" class="side-nav-link">
-                                <span> OverView </span>
-                            </a>
-                        </li>
-
-                        <!-- Thesis -->
-                        <li class="side-nav-item">
-                            <a href="pages-thesis.html" class="side-nav-link">
-                                <span> Thesis </span>
-                            </a>
-                        </li>
-
-                        <!-- Scholar -->
-                        <li class="side-nav-item">
-                            <a href="scholar.html" class="side-nav-link">
-                                <span> Scholar </span>
-                            </a>
-                        </li>
-
-                        <!-- Theme -->
-                        <li class="side-nav-item">
-                            <a href="pages-theme.html" class="side-nav-link">
-                                <span> Theme </span>
-                            </a>
-                        </li>
-                    </ul>
-
-                    <div class="clearfix"></div>
-                    <!-- Sidebar -left -->
-
-                </div>
-                <!-- Left Sidebar End -->
-
-                <div class="content-page">
-                    <div class="content">
-                        
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="card">
-                                    <div class="card-body">
-
-                                        <table id="selection-datatable" class="table table-striped dt-responsive nowrap" width="100%">
-                                            <thead>
-                                                <tr>
-                                                    <th>ID</th>
-                                                    <th>Theme</th>
-                                                    <th>Thesis Number</th>
-                                                    <th>Action</th>
-                                                </tr>
-                                            </thead>
-                                        
-                                            <tbody>
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td>A</td>
-                                                    <td>233</td>
-                                                    <td class="table-action">
-                                                        <a href="javascript:void(0);" class="action-icon"> <i class="mdi mdi-delete"></i></a>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-
-                                        <br>
-                                        
-                                        <div class="row">
-                                            <div class="col-7">
-                                                <a href="scholar-details.html" class="btn btn-success mb-2">Add Scholar</a>
-                                                <a href="#" class="btn btn-danger mb-2">Delete Thesises</a>
-                                            </div>
-                                            <div class="col-5">
-                                                <a href="#" class="btn btn-info mb-2">Upload Thesises</a>
-                                                <a href="#" class="btn btn-info mb-2">Download Thesises</a>
-                                            </div>
-                                        </div>
-                                    </div> <!-- end card body-->
-                                </div> <!-- end card -->
-                            </div><!-- end col-->
-                        </div>
-                        <!-- end row-->
-
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h4 class="header-title m-t-0">Dropzone File Upload</h4>
-                                        <p class="text-muted font-13 m-b-30">
-                                            DropzoneJS is an open source library that provides drag’n’drop file uploads with image previews.
-                                        </p>
-    
-                                        <form action="/" method="post" class="dropzone" id="myAwesomeDropzone" data-plugin="dropzone" data-previews-container="#file-previews"
-                                            data-upload-preview-template="#uploadPreviewTemplate">
-                                            <div class="fallback">
-                                                <input name="file" type="file" multiple />
-                                            </div>
-    
-                                            <div class="dz-message needsclick">
-                                                <i class="h1 text-muted dripicons-cloud-upload"></i>
-                                                <h3>Drop files here or click to upload.</h3>
-                                                <span class="text-muted font-13">(This is just a demo dropzone. Selected files are
-                                                    <strong>not</strong> actually uploaded.)</span>
-                                            </div>
-                                        </form>
-    
-                                        <!-- Preview -->
-                                        <div class="dropzone-previews mt-3" id="file-previews"></div>
+                                <div class="row">
+                                    <div class="col-7">
+                                        <a th:href="@{/scholar-detail/} + '-2333'" class="btn btn-success mb-2">Add Scholar</a>
+                                        <button class="btn btn-danger mb-2 scholar-delete-selected-custom">Delete Scholars</button>
+                                        <a th:href="@{/scholar/download/} + 'scholar.json'" class="btn btn-info mb-2 scholar-download-custom">Download Scholars Data</a>
                                     </div>
-                                    <!-- end card-body -->
                                 </div>
-                                <!-- end card-->
-                            </div>
-                            <!-- end col-->
-                        </div>
-                        <!-- end row -->
-                    </div> <!-- content -->
+                            </div> <!-- end card body-->
+                        </div> <!-- end card -->
+                    </div><!-- end col-->
+                </div>
+                <!-- end row-->
 
-                    <!-- Footer Start -->
-                    <footer class="footer">
-                        <div class="row">
-                            <div class="col-md-6">
-                                2018 - 2019 © Hyper - Coderthemes.com
-                            </div>
-                            <div class="col-md-6">
-                                <div class="text-md-right footer-links d-none d-md-block">
-                                    <a href="javascript: void(0);">About</a>
-                                    <a href="javascript: void(0);">Support</a>
-                                    <a href="javascript: void(0);">Contact Us</a>
-                                </div>
-                            </div>
-                        </div>
-                    </footer>
-                    <!-- end Footer -->
-                </div> <!-- content-page -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <form action="#" class="dropzone">
+                                    <div class="fallback">
+                                        <input name="multipartFile" type="file" />
+                                    </div>
 
-            </div>
-        </div>
-        <!-- END Container -->
+                                    <div class="dz-message needsclick">
+                                        <i class="h1 text-muted dripicons-cloud-upload"></i>
+                                        <h3>Drop files here or click to upload.</h3>
+                                        <span class="text-muted font-13">(This is just a demo dropzone. Selected
+                                                files are
+                                                <strong>not</strong> actually uploaded.)</span>
+                                    </div>
+                                </form>
 
-        <!-- file preview template -->
-        <div class="d-none" id="uploadPreviewTemplate">
-            <div class="card mt-1 mb-0 shadow-none border">
-                <div class="p-2">
-                    <div class="row align-items-center">
-                        <div class="col-auto">
-                            <img data-dz-thumbnail class="avatar-sm rounded bg-light" alt="">
+                                <!-- Preview -->
+                                <div class="dropzone-previews mt-3" id="file-previews"></div>
+                            </div>
+                            <!-- end card-body -->
                         </div>
-                        <div class="col pl-0">
-                            <a href="javascript:void(0);" class="text-muted font-weight-bold" data-dz-name></a>
-                            <p class="mb-0" data-dz-size></p>
-                        </div>
-                        <div class="col-auto">
-                            <!-- Button -->
-                            <a href="" class="btn btn-link btn-lg text-muted" data-dz-remove>
-                                <i class="dripicons-cross"></i>
-                            </a>
-                        </div>
+                        <!-- end card-->
                     </div>
+                    <!-- end col-->
+                </div>
+                <!-- end row -->
+            </div> <!-- content -->
+
+            <div class="card">
+                <div class="card-body">
+                    <!-- Danger Filled Modal -->
+                    <div id="fill-danger-modal" class="modal fade" tabindex="-1" role="dialog"
+                         aria-labelledby="fill-danger-modalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content modal-filled bg-danger">
+                                <div class="modal-header">
+                                    <h4 class="modal-title" id="fill-danger-modalLabel">删除该条目</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                        ×
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <p></p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-light" data-dismiss="modal">关闭</button>
+                                    <button type="button" class="btn btn-outline-light scholar-delete-one-custom">确认</button>
+                                </div>
+                            </div><!-- /.modal-content -->
+                        </div><!-- /.modal-dialog -->
+                    </div><!-- /.modal -->
+                </div> <!-- end card-body-->
+            </div> <!-- end card-->
+
+            <!-- Footer Start -->
+            <footer class="footer" th:replace="overview/public :: #public_footer">
+            </footer>
+            <!-- end Footer -->
+        </div> <!-- content-page -->
+
+    </div>
+</div>
+<!-- END Container -->
+
+<!-- file preview template -->
+<div class="d-none" id="uploadPreviewTemplate">
+    <div class="card mt-1 mb-0 shadow-none border">
+        <div class="p-2">
+            <div class="row align-items-center">
+                <div class="col-auto">
+                    <img data-dz-thumbnail class="avatar-sm rounded bg-light" alt="">
+                </div>
+                <div class="col pl-0">
+                    <a href="javascript:void(0);" class="text-muted font-weight-bold" data-dz-name></a>
+                    <p class="mb-0" data-dz-size></p>
+                </div>
+                <div class="col-auto">
+                    <!-- Button -->
+                    <a href="" class="btn btn-link btn-lg text-muted" data-dz-remove>
+                        <i class="dripicons-cross"></i>
+                    </a>
                 </div>
             </div>
         </div>
+    </div>
+</div>
 
-        <!-- App js -->
-        <script src="assets/js/app.min.js"></script>
+<!-- App js -->
+<script th:src="@{/js/app.min.js}"></script>
 
-        <!-- third party js -->
-        <script src="assets/js/vendor/jquery.dataTables.min.js"></script>
-        <script src="assets/js/vendor/dataTables.bootstrap4.js"></script>
-        <script src="assets/js/vendor/dataTables.responsive.min.js"></script>
-        <script src="assets/js/vendor/responsive.bootstrap4.min.js"></script>
-        <script src="assets/js/vendor/dataTables.buttons.min.js"></script>
-        <script src="assets/js/vendor/buttons.bootstrap4.min.js"></script>
-        <script src="assets/js/vendor/buttons.html5.min.js"></script>
-        <script src="assets/js/vendor/buttons.flash.min.js"></script>
-        <script src="assets/js/vendor/buttons.print.min.js"></script>
-        <script src="assets/js/vendor/dataTables.keyTable.min.js"></script>
-        <script src="assets/js/vendor/dataTables.select.min.js"></script>
-        <script src="assets/js/vendor/dropzone.min.js"></script>
-        <!-- third party js ends -->
+<!-- third party js -->
+<script th:src="@{/js/vendor/jquery.dataTables.min.js}"></script>
+<script th:src="@{/js/vendor/dataTables.bootstrap4.js}"></script>
+<script th:src="@{/js/vendor/dataTables.responsive.min.js}"></script>
+<script th:src="@{/js/vendor/responsive.bootstrap4.min.js}"></script>
+<script th:src="@{/js/vendor/dataTables.buttons.min.js}"></script>
+<script th:src="@{/js/vendor/buttons.bootstrap4.min.js}"></script>
+<script th:src="@{/js/vendor/buttons.html5.min.js}"></script>
+<script th:src="@{/js/vendor/buttons.flash.min.js}"></script>
+<script th:src="@{/js/vendor/buttons.print.min.js}"></script>
+<script th:src="@{/js/vendor/dataTables.keyTable.min.js}"></script>
+<script th:src="@{/js/vendor/dataTables.select.min.js}"></script>
+<!-- third party js ends -->
 
-        <!-- File upload js -->
-        <script src="assets/js/ui/component.fileupload.js"></script>
-        <!-- end File upload js -->
+<!-- File upload js -->
+<script th:src="@{/js/ui/component.fileupload.js}"></script>
+<!-- end File upload js -->
 
-        <!-- demo app -->
-        <script src="assets/js/pages/demo.datatable-init.js"></script>
-        <!-- end demo js-->
+<!-- demo app -->
+<script th:src="@{/js/pages/demo.datatable-init.js}"></script>
+<!-- end demo js-->
 
-    </body>
+<!-- custom js file -->
+<script th:src="@{/js/management/scholar.js}"></script>
+<!-- end custom js file -->
+
+</body>
 
 </html>

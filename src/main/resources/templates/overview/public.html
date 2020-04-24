@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
+<!-- overview head start -->
 <head lang="en" id="public_overview_head">
     <meta charset="utf-8"/>
     <title>SDPR Manager System</title>
@@ -22,7 +23,9 @@
     <!-- JQuery WebJar -->
     <script th:src="@{/webjars/jquery/3.4.1/jquery.js}"></script>
 </head>
+<!-- overview head end -->
 
+<!-- thesis head start -->
 <head lang="en" id="public_thesis_head">
     <meta charset="utf-8"/>
     <title>Hyper - Responsive Bootstrap 4 Admin Dashboard</title>
@@ -51,7 +54,9 @@
     <link th:href="@{/dropzone-5.7.0/dropzone.css}" rel="stylesheet" type="text/css" />
     <script th:src="@{/dropzone-5.7.0/dropzone.js}"></script>
 </head>
+<!-- thesis head end -->
 
+<!-- thesis details head start -->
 <head lang="en" id="public_thesis_details_head">
     <meta charset="utf-8" />
     <title>Hyper - Responsive Bootstrap 4 Admin Dashboard</title>
@@ -65,6 +70,51 @@
     <link th:href="@{/css/icons.min.css}" rel="stylesheet" type="text/css" />
     <link th:href="@{/css/app.min.css}" rel="stylesheet" type="text/css" />
 </head>
+<!-- thesis details head end -->
+
+<!-- scholar head start -->
+<head lang="en" id="public_scholar_head">
+    <meta charset="utf-8"/>
+    <title>Hyper - Responsive Bootstrap 4 Admin Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description"/>
+    <meta content="Coderthemes" name="author"/>
+    <!-- App favicon -->
+    <link rel="shortcut icon" th:href="@{/images/favicon.ico}">
+
+    <!-- third party css -->
+    <link th:href="@{/css/vendor/dataTables.bootstrap4.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/css/vendor/responsive.bootstrap4.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/css/vendor/buttons.bootstrap4.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/css/vendor/select.bootstrap4.css}" rel="stylesheet" type="text/css"/>
+    <!-- third party css end -->
+
+    <!-- App css -->
+    <link th:href="@{/css/icons.min.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/css/app.min.css}" rel="stylesheet" type="text/css"/>
+
+    <!-- DropZone -->
+    <link th:href="@{/dropzone-5.7.0/basic.css}" rel="stylesheet" type="text/css" />
+    <link th:href="@{/dropzone-5.7.0/dropzone.css}" rel="stylesheet" type="text/css" />
+    <script th:src="@{/dropzone-5.7.0/dropzone.js}"></script>
+</head>
+<!-- scholar head end -->
+
+<!-- scholar detail head start -->
+<head lang="en" id="public_scholar_detail_head">
+    <meta charset="utf-8"/>
+    <title>Hyper - Responsive Bootstrap 4 Admin Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description"/>
+    <meta content="Coderthemes" name="author"/>
+    <!-- App favicon -->
+    <link rel="shortcut icon" th:href="@{/images/favicon.ico}">
+
+    <!-- App css -->
+    <link th:href="@{/css/icons.min.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/css/app.min.css}" rel="stylesheet" type="text/css"/>
+</head>
+<!-- scholar detail head end -->
 
 <body>
 <!-- Topbar Start -->
@@ -173,7 +223,7 @@
 
                 <!-- Scholar -->
                 <li class="side-nav-item">
-                    <a href="pages-scholar.html" class="side-nav-link">
+                    <a th:href="@{/scholar}" class="side-nav-link">
                         <span> Scholar </span>
                     </a>
                 </li>

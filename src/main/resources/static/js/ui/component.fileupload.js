@@ -24,7 +24,7 @@ new Dropzone(".dropzone", {
             // 上传成功触发的事件
             if (data['flag']) {
                 console.log("文件上传成功")
-                window.location.href = "/thesis"
+                window.location.href = "/overview"
             }
         });
         this.on("error", function (file, data) {

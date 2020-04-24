@@ -145,10 +145,14 @@ public class FileUtils {
                 sb.append(name).append(" and ");
 
                 // 保存学者信息
-                Scholar scholar = Scholar.builder()
-                        .scholarName(name.replace(",", ""))
-                        .scholarLastName(name.split(",")[1].trim())
-                        .build();
+                Scholar scholar = new Scholar();
+                scholar.setScholarName(name.replace(",", ""));
+                String[] nameLastAndFirst = name.split(",");
+                if (nameLastAndFirst.length > 1) {
+                    scholar.setScholarLastName(nameLastAndFirst[1].trim());
+                } else {
+                    scholar.setScholarLastName(nameLastAndFirst[0].trim());
+                }
                 scholars.add(scholar);
             });
 
