@@ -33,17 +33,20 @@ $(function () {
         // 将要删除的信息 Id 发送给后端
         $.ajax({
             "type": "post",
-            "dataType": "text",
+            "dataType": "json",
             "contentType": "application/json",
             "async": false,
             "url": "/thesis/delete",
             "data": JSON.stringify(ids),
             "success": function (data) {
-                console.log("success")
-                window.location.href = "/thesis"
+                if(data['flag']) {
+                    window.location.href = "/thesis"
+                } else {
+                    console.log("后台数据库删除数据失败")
+                }
             },
             "error": function (data) {
-                console.log("failure")
+                console.log("前端发送任务失败")
             }
         })
     }

@@ -55,14 +55,11 @@ public class ThesisController {
 
     @ResponseBody
     @PostMapping("/thesis/delete")
-    public String deleteByIds(@RequestBody List<String> ids) {
+    public Map<String, Boolean> deleteByIds(@RequestBody List<String> ids) {
         log.info("删除论文信息 ID：" + ids);
-        System.out.println(ids);
-        if (thesisService.removeByIds(ids)) {
-            return "redirect:/thesis";
-        } else {
-            return "删除失败";
-        }
+        Map<String, Boolean> res = new HashMap<>(2);
+        res.put("flag", thesisService.removeByIds(ids));
+        return res;
     }
 
     @GetMapping("/thesis-details/{thesisId}")
@@ -124,7 +121,7 @@ public class ThesisController {
         if (thesisService.saveOrUpdate(thesis)) {
             return "redirect:/thesis";
         } else {
-            return "修改或添加失败";
+            return "修改或添加论文信息失败";
         }
     }
 
