@@ -63,7 +63,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group mb-3">
-                                        <label for="validationCustom04">论文作者（不同作者请用英文逗号分隔）</label>
+                                        <label for="validationCustom04">论文作者（不同作者请用 and 分隔）</label>
                                         <input type="text" class="form-control" id="validationCustom04"
                                                placeholder="论文作者（不同作者请用英文逗号分隔）"
                                                th:value="*{thesisAuthor}" name="thesisAuthor" required>
@@ -143,7 +143,7 @@
                                     </div>
                                     <div class="form-group mb-3">
                                         <label for="validationCustom16">论文 BibTex 信息</label>
-                                        <textarea class="form-control" id="validationCustom16" rows="12" required
+                                        <textarea class="form-control" id="validationCustom16" rows="12"
                                                   th:text="*{thesisBibtex}" name="thesisBibtex">
                                         </textarea>
                                         <div class="invalid-feedback">

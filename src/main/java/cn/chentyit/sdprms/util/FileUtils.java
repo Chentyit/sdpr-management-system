@@ -40,7 +40,8 @@ public class FileUtils {
         // 使用字符流包装字节流
         BufferedReader br = new BufferedReader(
                 new InputStreamReader(
-                        new ByteArrayInputStream(multipartFile.getBytes()), StandardCharsets.UTF_8));
+                        new ByteArrayInputStream(multipartFile.getBytes()),
+                        StandardCharsets.UTF_8));
         // 获取文件中的信息
         String line = br.readLine();
         StringBuilder sb = new StringBuilder();
@@ -140,7 +141,7 @@ public class FileUtils {
             StringBuilder sb = new StringBuilder();
             bibTexJsonObj.getAuthor().forEach(author -> {
                 // 获取学者名字
-                String name = author.getName();
+                String name = author.getName().replace(",", " ");
 
                 sb.append(name).append(" and ");
 
