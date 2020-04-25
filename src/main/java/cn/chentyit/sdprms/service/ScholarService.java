@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * @Author Chentyit
  * @Date 2020/4/20 17:51
- * @Description:
+ * @Description: 学者服务层
  */
 public interface ScholarService extends IService<Scholar> {
 
@@ -18,4 +18,12 @@ public interface ScholarService extends IService<Scholar> {
      * @return
      */
     List<Scholar> getAllScholar();
+
+    /**
+     * 通过学者名字查找 ID
+     *
+     * @param authorNames
+     * @return
+     */
+    List<Integer> findScholarByName(List<String> authorNames);
 }

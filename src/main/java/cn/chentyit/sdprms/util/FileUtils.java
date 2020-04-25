@@ -141,7 +141,7 @@ public class FileUtils {
             StringBuilder sb = new StringBuilder();
             bibTexJsonObj.getAuthor().forEach(author -> {
                 // 获取学者名字
-                String name = author.getName().replace(",", " ");
+                String name = author.getName().replace(",", "");
 
                 sb.append(name).append(" and ");
 

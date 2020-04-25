@@ -13,6 +13,7 @@ import cn.chentyit.sdprms.util.FileUtils;
 import cn.chentyit.sdprms.util.ResultPackUtils;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
+import com.google.common.base.Splitter;
 import com.google.gson.Gson;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -99,6 +100,25 @@ public class ThesisController {
 
     @PostMapping("/thesis-detail")
     public String updateOrInsertThesis(ThesisDTO thesisDTO) {
+        // 先删除数据库中的关联数据
+        thesisScholarService.deleteItem(thesisDTO.getThesisId());
+
+        // 解析学者字段
+        List<String> authorNames = Splitter.on("and")
+                .trimResults()
+                .omitEmptyStrings()
+                .splitToList(thesisDTO.getThesisAuthor());
+
+        // 获取保存的学者 ID
+        List<Integer> ids = scholarService.findScholarByName(authorNames);
+
+        // 向关联表中插入数据
+        List<ThesisScholar> thesisScholars = new ArrayList<>();
+        ids.forEach(scholarId -> {
+            thesisScholars.add(ThesisScholar.builder().thesisId(thesisDTO.getThesisId()).scholarId(scholarId).build());
+        });
+        thesisScholarService.saveBatch(thesisScholars);
+
         Thesis thesis = Thesis.builder()
                 .thesisId(thesisDTO.getThesisId())
                 .thesisTitle(thesisDTO.getThesisTitle())
