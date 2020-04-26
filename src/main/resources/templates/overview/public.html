@@ -116,6 +116,29 @@
 </head>
 <!-- scholar detail head end -->
 
+<!-- theme head start -->
+<head lang="en" id="public_theme_head">
+    <meta charset="utf-8"/>
+    <title>Hyper - Responsive Bootstrap 4 Admin Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description"/>
+    <meta content="Coderthemes" name="author"/>
+    <!-- App favicon -->
+    <link rel="shortcut icon" th:href="@{/images/favicon.ico}">
+
+    <!-- third party css -->
+    <link th:href="@{/css/vendor/dataTables.bootstrap4.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/css/vendor/responsive.bootstrap4.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/css/vendor/buttons.bootstrap4.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/css/vendor/select.bootstrap4.css}" rel="stylesheet" type="text/css"/>
+    <!-- third party css end -->
+
+    <!-- App css -->
+    <link th:href="@{/css/icons.min.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/css/app.min.css}" rel="stylesheet" type="text/css"/>
+</head>
+<!-- theme head end -->
+
 <body>
 <!-- Topbar Start -->
 <div class="navbar-custom topnav-navbar" id="public_topbar">
@@ -230,7 +253,7 @@
 
                 <!-- Theme -->
                 <li class="side-nav-item">
-                    <a href="pages-theme.html" class="side-nav-link">
+                    <a th:href="@{/theme}" class="side-nav-link">
                         <span> Theme </span>
                     </a>
                 </li>

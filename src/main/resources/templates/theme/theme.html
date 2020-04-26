@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head lang="en" th:replace="overview/public :: #public_theme_head">
+</head>
+
+<body>
+
+<!-- Topbar Start -->
+<div class="navbar-custom topnav-navbar" th:replace="overview/public :: #public_topbar">
+</div>
+<!-- end Topbar -->
+
+
+<div class="container-fluid">
+
+    <!-- Begin page -->
+    <div class="wrapper">
+
+        <!-- ============================================================== -->
+        <!-- Start Page Content here -->
+        <!-- ============================================================== -->
+
+        <!-- Start Content-->
+
+        <!-- ========== Left Sidebar Start ========== -->
+        <div class="left-side-menu" th:replace="overview/public :: #public_left">
+        </div>
+        <!-- Left Sidebar End -->
+
+        <div class="content-page">
+            <div class="content">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row mb-2">
+                                    <div class="col-sm-12">
+                                        <div class="text-sm-right">
+                                            <button type="button"
+                                                    class="btn btn-info"
+                                                    data-toggle="modal"
+                                                    data-target="#login-modal">
+                                                Add Theme
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- SignIn modal content -->
+                                <div id="login-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-body">
+                                                <div class="text-center mt-2 mb-4">
+                                                    <a href="index.html" class="text-success">
+                                                        <span><img th:src="@{/images/logo-dark.png}" alt="" height="18"></span>
+                                                    </a>
+                                                </div>
+
+                                                <form th:action="@{/theme/add}" class="pl-3 pr-3" th:method="post">
+
+                                                    <div class="form-group">
+                                                        <label for="emailaddress1">Theme Name</label>
+                                                        <input class="form-control"
+                                                               type="text"
+                                                               id="emailaddress1"
+                                                               required=""
+                                                               placeholder="theme name"
+                                                               name="themeName">
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox"
+                                                                   class="custom-control-input"
+                                                                   id="customCheck2"
+                                                                   required>
+                                                            <label class="custom-control-label" for="customCheck2">确认是否添加该主题</label>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group text-center">
+                                                        <button class="btn btn-rounded btn-primary" type="submit">ADD
+                                                        </button>
+                                                    </div>
+
+                                                </form>
+
+                                            </div>
+                                        </div><!-- /.modal-content -->
+                                    </div><!-- /.modal-dialog -->
+                                </div><!-- /.modal -->
+
+                                <table id="datatable-buttons" class="table table-striped dt-responsive nowrap"
+                                       width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th>主题 ID</th>
+                                            <th>主题名称</th>
+                                            <th>主题下属论文数</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        <tr th:each="themeVo : ${themeVos}">
+                                            <td th:text="${themeVo.themeId}">主题 ID</td>
+                                            <td th:text="${themeVo.themeName}">主题名称</td>
+                                            <td th:text="${themeVo.thesisNum}">主题下属论文数</td>
+                                            <td class="table-action">
+                                                <a href="javascript:void(0);" class="action-icon theme-delete-btn-custom"  th:id="${themeVo.themeId}">
+                                                    <i class="mdi mdi-delete"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div> <!-- end card body-->
+                        </div> <!-- end card -->
+                    </div><!-- end col-->
+                </div>
+                <!-- end row-->
+
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="header-title mb-4">Donut Chart</h4>
+                                <div class="donut-container text-center" style="width: 100%;"></div>
+                                <div class="legend-chart-container text-center"></div>
+                            </div>
+                            <!-- end card body-->
+                        </div>
+                        <!-- end card -->
+                    </div>
+                    <!-- end col-->
+                </div>
+            </div> <!-- content -->
+
+            <!-- Footer Start -->
+            <footer class="footer" th:replace="overview/public :: #public_footer">
+            </footer>
+            <!-- end Footer -->
+        </div> <!-- content-page -->
+
+    </div>
+</div>
+<!-- END Container -->
+
+<!-- App js -->
+<script th:src="@{/js/app.min.js}"></script>
+
+<!-- third party js -->
+<script th:src="@{/js/vendor/jquery.dataTables.min.js}"></script>
+<script th:src="@{/js/vendor/dataTables.bootstrap4.js}"></script>
+<script th:src="@{/js/vendor/dataTables.responsive.min.js}"></script>
+<script th:src="@{/js/vendor/responsive.bootstrap4.min.js}"></script>
+<script th:src="@{/js/vendor/dataTables.buttons.min.js}"></script>
+<script th:src="@{/js/vendor/buttons.bootstrap4.min.js}"></script>
+<script th:src="@{/js/vendor/buttons.html5.min.js}"></script>
+<script th:src="@{/js/vendor/buttons.flash.min.js}"></script>
+<script th:src="@{/js/vendor/buttons.print.min.js}"></script>
+<script th:src="@{/js/vendor/dataTables.keyTable.min.js}"></script>
+<script th:src="@{/js/vendor/dataTables.select.min.js}"></script>
+<script th:src="@{https://cdn.bootcss.com/d3/5.9.7/d3.min.js}"></script>
+<script th:src="@{https://cdn.bootcss.com/britecharts/3.0.0/bundled/britecharts.min.js}"></script>
+<!-- third party js ends -->
+
+<!-- demo app -->
+<script th:src="@{/js/pages/demo.datatable-init.js}"></script>
+<script th:src="@{/js/pages/demo.britechart.js}"></script>
+<!-- end demo js-->
+
+<!-- custom js file -->
+<script th:src="@{/js/management/theme.js}"></script>
+<!-- end custom js file -->
+
+</body>
+
+</html>

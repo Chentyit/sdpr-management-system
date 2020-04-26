@@ -1,6 +1,7 @@
 package cn.chentyit.sdprms.model.entity;
 
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -24,7 +25,7 @@ public class Theme implements Serializable {
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
 
-    @TableField(value = "theme_id")
+    @TableId(value = "theme_id")
     private int themeId;
 
     @TableField(value = "theme_name")

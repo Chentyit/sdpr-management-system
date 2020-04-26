@@ -104,7 +104,7 @@ public class ThesisController {
         thesisScholarService.deleteItem(thesisDTO.getThesisId());
 
         // 解析学者字段
-        List<String> authorNames = Splitter.on("and")
+        List<String> authorNames = Splitter.on(" and ")
                 .trimResults()
                 .omitEmptyStrings()
                 .splitToList(thesisDTO.getThesisAuthor());

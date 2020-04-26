@@ -32,12 +32,22 @@ public class OverViewController {
         return modelAndView;
     }
 
+    /**
+     * 获取走势图数据
+     *
+     * @return
+     */
     @ResponseBody
     @PostMapping("/sta/getNopData")
     public List<Object> getNopData() {
         return overviewService.getNopData();
     }
 
+    /**
+     * 获取饼图数据
+     *
+     * @return
+     */
     @ResponseBody
     @PostMapping("/sta/getDofData")
     public List<DofVo> getDofVo() {

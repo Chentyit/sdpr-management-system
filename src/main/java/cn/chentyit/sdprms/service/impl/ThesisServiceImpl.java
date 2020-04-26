@@ -35,4 +35,11 @@ public class ThesisServiceImpl extends ServiceImpl<ThesisMapper, Thesis> impleme
     public int deleteThesisById(List<String> ids) {
         return thesisMapper.deleteBatchIds(ids);
     }
+
+    @Override
+    public int getTheNumberOfThesisOnTheme(int themeId) {
+        LambdaQueryWrapper<Thesis> lambdaQueryWrapper = new LambdaQueryWrapper<>();
+        lambdaQueryWrapper.eq(Thesis::getThemeId, themeId);
+        return thesisMapper.selectList(lambdaQueryWrapper).size();
+    }
 }

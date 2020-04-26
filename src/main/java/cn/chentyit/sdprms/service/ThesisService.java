@@ -27,4 +27,12 @@ public interface ThesisService extends IService<Thesis> {
      * @return
      */
     int deleteThesisById(List<String> ids);
+
+    /**
+     * 获取某个主题下的论文数量
+     *
+     * @param themeId
+     * @return
+     */
+    int getTheNumberOfThesisOnTheme(int themeId);
 }

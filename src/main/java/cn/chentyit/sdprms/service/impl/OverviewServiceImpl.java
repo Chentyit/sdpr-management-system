@@ -40,6 +40,11 @@ public class OverviewServiceImpl implements OverviewService {
     @Resource
     private ThesisMapper thesisMapper;
 
+    /**
+     * 获取 学者 || 主题 || 论文 总数
+     *
+     * @return
+     */
     @Override
     public Map<String, Integer> getSummaryData() {
         LambdaQueryWrapper<Scholar> scholarLambdaQuery = new LambdaQueryWrapper<>();
@@ -66,23 +71,38 @@ public class OverviewServiceImpl implements OverviewService {
         return result;
     }
 
+    /**
+     * 获取走势图数据
+     *
+     * @return
+     */
     @Override
     public List<Object> getNopData() {
+        // 获取当前系统时间
         LocalDateTime localDateTime = LocalDateTime.now();
+        // 获取 10 年内每每年的各个主题的数据量
         List<NumberOfPublication> nopData = statisticsMapper.getNumberOfPublication(localDateTime.getYear() - 9);
+        // 查询出所有的主题数据
         List<Theme> themes = themeMapper.selectList(null);
 
         Map<String, Map<String, Integer>> result = new HashMap<>(16);
+
+        // 构造数据存储格式
         for (Theme theme : themes) {
             result.put(theme.getThemeName(), new HashMap<>(16));
         }
-
-        for (NumberOfPublication data: nopData) {
+        // 向数据格式中添加数据
+        for (NumberOfPublication data : nopData) {
             result.get(data.getThemeName()).put(data.getThesisYear(), data.getNum());
         }
         return ResultPackUtils.packDataMapToDataList(result);
     }
 
+    /**
+     * 获取饼图数据
+     *
+     * @return
+     */
     @Override
     public List<DofVo> getDofData() {
         return ResultPackUtils.packDofList(statisticsMapper.getDistributionOfField());
